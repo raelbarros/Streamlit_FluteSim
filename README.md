@@ -4,7 +4,7 @@
 
 ## Instalação
 
-Para instalar as dependências necessárias, certifique-se de ter o Python e o `poetry` instalados. Depois, siga estes passos:
+Para instalar as dependências necessárias, certifique-se de ter o Python, depois siga estes passos:
 
 1. Clone o repositório:
 
