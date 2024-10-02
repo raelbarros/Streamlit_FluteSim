@@ -13,7 +13,7 @@ git clone https://github.com/raelbarros/streamlitFluteSim.git
 cd streamlitFluteSim
 ```
 
-2. Instale as dependências usando o `Poetry`:
+2. Instale as dependências usando o `pip`:
 
 ```bash
 pip install -r requirements.txt
