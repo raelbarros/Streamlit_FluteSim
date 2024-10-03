@@ -1,5 +1,5 @@
 
-# Simulação de Flauta com Streamlit
+# Streamlit - Dash de resultados do FluteSim
 
 
 ## Instalação
