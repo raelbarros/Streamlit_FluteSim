@@ -9,7 +9,7 @@ Para instalar as dependências necessárias, certifique-se de ter o Python, depo
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/raelbarros/streamlitFluteSim.git
+git clone https://github.com/raelbarros/Streamlit_FluteSim.git
 cd streamlitFluteSim
 ```
 
