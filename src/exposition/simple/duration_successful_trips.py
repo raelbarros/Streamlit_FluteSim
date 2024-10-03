@@ -1,6 +1,5 @@
 import numpy as np
-import pandas as pd
-from lib.utils.utils import plot_bar_simple
+from utils.graph_plotly import plot_bar_simple
 
 
 #ARQUIVO: generalDroneData

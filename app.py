@@ -1,6 +1,6 @@
 import streamlit as st
-from lib.controller_simple import simple_process
-from lib.controller_complete import complete_process
+from src.controller_simple import simple_process
+from src.controller_complete import complete_process
 
 # Nome dos arquivos validos
 _VALID_FILES = ['droneCollisionData.csv', 'generalDroneData.csv', 'generalSimulationData.csv']

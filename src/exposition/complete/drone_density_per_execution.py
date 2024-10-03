@@ -1,5 +1,4 @@
 import numpy as np
-from utils.graph_plotly import plot_bar_simple
 
 # ARQUIVO: generalSimulationData
 
@@ -11,17 +10,7 @@ def drone_density_per_execution(df):
     num_drones = np.array(df["numero total de drones lancados"].values)
     label = np.array(df["Numero da execucao"].values)
     
-    n = len(df["Numero da execucao"])
-    list_intervalo = np.zeros(n)
-    
-    return plot_bar_simple(
-        labels=label,
-        values=num_drones,
-        intervalos=list_intervalo,
-        title="Densidade de Drones por execução",
-        x_label="Simulação",
-        y_label="Quantidade",
-    )
+    return {"num_drones": num_drones, "label": label}
 
 
 # https://www.lampada.uerj.br/arquivosdb/_book/intervaloconfianca.html

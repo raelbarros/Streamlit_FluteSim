@@ -1,5 +1,4 @@
-import pandas as pd
-from lib.utils.utils import plot_histogram, plot_boxsplot
+from utils.graph_plotly import plot_histogram, plot_boxsplot
 
 # ARQUIVO: generalDroneData_12
 

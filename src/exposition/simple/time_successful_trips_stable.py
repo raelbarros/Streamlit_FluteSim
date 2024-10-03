@@ -1,6 +1,4 @@
-import numpy as np
-import pandas as pd
-from lib.utils.utils import plot_histogram
+from utils.graph_plotly import plot_histogram
 
 
 #ARQUIVO: generalDroneData

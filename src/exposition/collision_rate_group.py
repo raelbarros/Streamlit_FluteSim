@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from lib.utils.utils import plot_bar_group
+from utils.graph_plotly import plot_bar_group
 
 # ARQUIVO: generalSimulationData
 

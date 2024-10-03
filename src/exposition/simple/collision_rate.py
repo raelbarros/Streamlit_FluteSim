@@ -1,6 +1,5 @@
-import pandas as pd
 import numpy as np
-from lib.utils.utils import plot_bar_simple
+from utils.graph_plotly import plot_bar_simple
 
 # ARQUIVO: generalSimulationData
 

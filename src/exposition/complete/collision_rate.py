@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from lib.utils.utils import plot_bar_simple
 
 # ARQUIVO: generalSimulationData
 
@@ -16,7 +15,7 @@ def _calculate(df):
     n = len(taxa_colisoes)
     intervalo = 1.96 * (desvio_padrao / np.sqrt(n))
 
-    return media, desvio_padrao, intervalo
+    return {"media": media, "desvio_padrao":desvio_padrao, "intervalo": desvio_padrao}
 
 
 def collision_rate_geral(df):
