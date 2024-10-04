@@ -12,7 +12,7 @@ def plot_boxsplot(df, title, x, y, color, labels):
     Cria um boxplot usando plotly.
 
     Args:
-        title (str): Título do gráfico.
+        title (str): Titulo do grafico.
         labels (list): Lista de rótulos para cada conjunto de dados.
         args: Conjuntos de dados para plotar.
 
@@ -35,7 +35,7 @@ def plot_boxsplot(df, title, x, y, color, labels):
 
 def plot_histogram(df, title, x, color, labels):
     """
-    Cria um histograma com contagens e sobrepõe a curva KDE escalada para as contagens.
+    Cria um histograma com contagens
     """
 
     fig = px.histogram(
@@ -52,9 +52,9 @@ def plot_histogram(df, title, x, color, labels):
     return fig
 
 
-def plot_bar_simple(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Eixo Y", title="Gráfico de Barras", show_num=False, show_interval=True):
+def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Eixo Y", title="grafico de Barras", show_num=False, show_interval=True):
     """
-    Cria um gráfico de barras (simples ou agrupado) com intervalos de confiança.
+    Cria um grafico de barras (simples ou agrupado) com intervalos de confiança.
 
     Args:
         values (np.ndarray or list of np.ndarray): Valores das barras. Pode ser um array para barras simples ou uma lista de arrays para barras agrupadas.
@@ -62,11 +62,11 @@ def plot_bar_simple(values, intervalos=None, labels=None, x_label="Eixo X", y_la
         labels (np.ndarray): Rótulos das barras (para o eixo X).
         x_label (str): Legenda do eixo X.
         y_label (str): Legenda do eixo Y.
-        title (str): Título do gráfico.
+        title (str): Titulo do grafico.
         show_num (bool): Se True, exibe os valores acima das barras.
 
     Retorna:
-        fig (go.Figure): Figura plotly com o gráfico de barras.
+        fig (go.Figure): Figura plotly com o grafico de barras.
     """
     # Verifica se values é uma lista (barras agrupadas) ou um array (barras simples)
     if isinstance(values, list):
@@ -92,7 +92,7 @@ def plot_bar_simple(values, intervalos=None, labels=None, x_label="Eixo X", y_la
             ))
         fig.update_layout(barmode='group')
     else:
-        # Gráfico de barras simples
+        # grafico de barras simples
         fig = go.Figure(go.Bar(
             x=labels,
             y=values,

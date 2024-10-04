@@ -1,14 +1,16 @@
 import streamlit as st
 import pandas as pd
 
-#MIGRANDO
-from src.visualization.collision_rate import calculate_collision_rate, plot_collision_rate
-from src.visualization.collision_rate_per_execution import calculate_collision_rate_per_execution, plot_collision_rate_per_execution
-from src.visualization.collisions_per_situation import calculate_collisions_per_situation, plot_collisions_per_situation
-from src.visualization.drone_density_per_execution import calculate_drone_density_per_execution, plot_drone_density_per_execution
-from src.visualization.duration_successful_trips import calculate_duration_successful_trips, plot_duration_successful_trips
-from src.visualization.flight_height import calculate_flight_height, plot_flight_height
-from src.visualization.time_successful_trips_stable import calculate_time_successful_trips_stable, plot_time_successful_trips_stable
+# Importando as funçoes de cada grafico
+from src.visualization.execution.collision_rate_per_execution import calculate_collision_rate_per_execution, plot_collision_rate_per_execution
+from src.visualization.simulation.collision_rate_per_simulation import calculate_collision_rate_per_simulation, plot_collision_rate_per_simulation
+from src.visualization.simulation.collisions_per_situation import calculate_collisions_per_situation, plot_collisions_per_situation
+from src.visualization.execution.drone_density_per_execution import calculate_drone_density_per_execution, plot_drone_density_per_execution
+from src.visualization.simulation.drone_density_per_simulation import calculate_drone_density_per_simulation, plot_drone_density_per_simulation
+from src.visualization.execution.duration_successful_trips_per_execution import calculate_duration_successful_trips_per_execution, plot_duration_successful_trips_per_execution
+from src.visualization.simulation.duration_successful_trips_per_simulation import calculate_duration_successful_trips_per_simulation, plot_duration_successful_trips_per_simulation
+from src.visualization.simulation.flight_height_per_simulation import calculate_flight_height, plot_flight_height
+from src.visualization.execution.time_successful_trips_stable_per_execution import calculate_time_successful_trips_stable_per_execution, plot_time_successful_trips_stable_per_execution
 
 
 # Mapeamento dos nomes de arquivos com as funçoes correspondentes
@@ -21,33 +23,42 @@ MAP_FUNCTIONS = {
     ],
     'generalSimulationData': [
         {
-            'function_name': calculate_collision_rate,
-            'plot': plot_collision_rate,
-        },
-        {
             'function_name': calculate_collision_rate_per_execution,
             'plot': plot_collision_rate_per_execution,
+        },
+        {
+            'function_name': calculate_collision_rate_per_simulation,
+            'plot': plot_collision_rate_per_simulation,
         },
         {
             'function_name': calculate_drone_density_per_execution,
             'plot': plot_drone_density_per_execution,
         },
+        {
+            'function_name': calculate_drone_density_per_simulation,
+            'plot': plot_drone_density_per_simulation,
+        },
     ],
     'generalDroneData': [
         {
-            'function_name': calculate_duration_successful_trips,
-            'plot': plot_duration_successful_trips,
+            'function_name': calculate_duration_successful_trips_per_execution,
+            'plot': plot_duration_successful_trips_per_execution,
+        },
+        {
+            'function_name': calculate_duration_successful_trips_per_simulation,
+            'plot': plot_duration_successful_trips_per_simulation,
         },
         {
             'function_name': calculate_flight_height,
             'plot': plot_flight_height,
         },
         {
-            'function_name': calculate_time_successful_trips_stable,
-            'plot': plot_time_successful_trips_stable,
+            'function_name': calculate_time_successful_trips_stable_per_execution,
+            'plot': plot_time_successful_trips_stable_per_execution,
         },
     ],
 }
+
 
 
 def _display_plots(file, functions):

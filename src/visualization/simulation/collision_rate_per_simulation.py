@@ -1,9 +1,9 @@
 import numpy as np
-from src.utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar
 
 # ARQUIVO: generalSimulationData
 
-def calculate_collision_rate(df):
+def calculate_collision_rate_per_simulation(df):
     """
     Calcula a taxa de colisao com base no DataFrame fornecido.
 
@@ -11,7 +11,7 @@ def calculate_collision_rate(df):
         df (DataFrame): DataFrame contendo os dados da simulaçao.
 
     Returns:
-        dict: Dicionário com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisao.
+        dict: Dicionrio com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisao.
     """
     num_colisoes = df["numero total de drones colidentes"].values
     num_drones = df["numero de drones lancados no tempo estavel"].values
@@ -33,9 +33,9 @@ def calculate_collision_rate(df):
     }
 
 
-def plot_collision_rate(data, labels=None):
+def plot_collision_rate_per_simulation(data, labels=None):
     """
-    Gera o gráfico da taxa de colisao.
+    Gera o grafico da taxa de colisao.
 
     Args:
         data (list or dict): Dados da taxa de colisao.
@@ -56,13 +56,13 @@ def plot_collision_rate(data, labels=None):
         labels = labels or [f"Simulaçao {i+1}" for i in range(len(data))]
     
     else:
-        raise ValueError("O parâmetro 'data' deve ser um dicionário ou uma lista de dicionários.")
+        raise ValueError("O parâmetro 'data' deve ser um dicionrio ou uma lista de dicionrios.")
 
-    return plot_bar_simple(
+    return plot_bar(
         values=media,
         intervalos=intervalo,
         labels=labels,
         title="Taxa de Colisao Geral",
-        x_label="Simulaçao",
+        x_label="Simulação",
         y_label="Collision rate (%)",
     )

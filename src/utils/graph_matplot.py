@@ -56,17 +56,17 @@ def plot_bar_group(**kwargs):
     # parametros default
     x_label = kwargs.get("x_label", "Eixo X")
     y_label = kwargs.get("y_label", "Eixo Y")
-    title = kwargs.get("title", "Gráfico de Barras")
+    title = kwargs.get("title", "Grafico de Barras")
     show_num = kwargs.get("show_num", False)
 
     figsize = (10, 6)
     width =  0.6
     fontsize = 12
 
-    # Criando o gráfico
+    # Criando o grafico
     fig, ax = plt.subplots(figsize=figsize)
 
-    # Calculando as posições das barras no eixo X
+    # Calculando as posiçoes das barras no eixo X
     x = np.arange(len(labels))
 
     # Plotando as barras para cada subcategoria
@@ -97,12 +97,12 @@ def plot_bar_group(**kwargs):
                     fontsize=10,
                 )
     
-    # Exibindo o gráfico
+    # Exibindo o grafico
     plt.tight_layout()
     
     return fig
 
-def plot_bar_simple(**kwargs):
+def plot_bar(**kwargs):
     """ Esta funcao cria um grafico de barras simples. 
         Os parâmetros opcionais permitem personalizar o grafico.
 
@@ -114,7 +114,7 @@ def plot_bar_simple(**kwargs):
         labels (np.ndarray): Array com os rotulos das barras.
         x_label (str, opcional): Legenda do eixo X. Padrão é ''.
         y_label (str, opcional): Legenda do eixo Y. Padrão é ''.
-        title (str, opcional): Título do gráfico. Padrão é ''.
+        title (str, opcional): Titulo do grafico. Padrão é ''.
         show_num (bool, opcional): Se True, exibe os valores acima das barras. Padrão é False.
 
     Raises:
@@ -142,14 +142,14 @@ def plot_bar_simple(**kwargs):
     labels = kwargs.get("labels", np.array(['']))
     x_label = kwargs.get("x_label", "Eixo X")
     y_label = kwargs.get("y_label", "Eixo Y")
-    title = kwargs.get("title", "Gráfico de Barras")
+    title = kwargs.get("title", "Grafico de Barras")
     show_num = kwargs.get("show_num", False)
 
     figsize = (10, 6)
     width =  0.6
     fontsize = 12
 
-    # Criando o gráfico
+    # Criando o grafico
     fig, ax = plt.subplots(figsize=figsize)
 
     # Plotar barras
@@ -178,7 +178,7 @@ def plot_bar_simple(**kwargs):
                 fontsize=10,
             )
 
-    # Exibindo o gráfico
+    # Exibindo o grafico
     plt.tight_layout()
     
     return fig
@@ -199,7 +199,7 @@ def plot_bar_simple(**kwargs):
 #     Cria um boxplot usando plotly.
 
 #     Args:
-#         title (str): Título do gráfico.
+#         title (str): Titulo do grafico.
 #         labels (list): Lista de rótulos para cada conjunto de dados.
 #         *args: Conjuntos de dados para plotar.
 
@@ -232,14 +232,14 @@ def plot_bar_simple(**kwargs):
 
 # def plot_histogram(df, x_label, y_label, title):
 #     """
-#     Cria um histograma com contagens e sobrepõe a curva KDE escalada para as contagens.
+#     Cria um histograma com contagens e sobrepoe a curva KDE escalada para as contagens.
 #     """
 #     # Converter e limpar os dados
 #     data = np.asarray(df)
 #     data = data[np.isfinite(data)]  # Remove NaNs e Infs
 
 #     if data.size == 0:
-#         raise ValueError("O conjunto de dados está vazio após a remoção de valores não finitos.")
+#         raise ValueError("O conjunto de dados est vazio após a remoção de valores não finitos.")
 
 #     # Calcular o histograma (com contagens)
 #     counts, bins = np.histogram(data, bins=20)
@@ -283,7 +283,7 @@ def plot_bar_simple(**kwargs):
 
 # def plot_bar_group(**kwargs):
 #     """
-#     Cria um gráfico de barras agrupadas com intervalos de confiança.
+#     Cria um grafico de barras agrupadas com intervalos de confiança.
 
 #     Args Obrigatórios:
 #         labels (np.ndarray): Rótulos do eixo X.
@@ -294,31 +294,31 @@ def plot_bar_simple(**kwargs):
 #     Args Opcionais:
 #         x_label (str): Legenda do eixo X.
 #         y_label (str): Legenda do eixo Y.
-#         title (str): Título do gráfico.
+#         title (str): Titulo do grafico.
 #         show_num (bool): Se True, exibe os valores acima das barras.
 
 #     Retorna:
-#         fig (go.Figure): Figura plotly com o gráfico de barras.
+#         fig (go.Figure): Figura plotly com o grafico de barras.
 #     """
 #     labels = kwargs.get("labels")
 #     values = kwargs.get("values")
 #     intervalos = kwargs.get("intervalos")
 #     legends = kwargs.get("legends")
 
-#     # Verifica tipo das variáveis de input
+#     # Verifica tipo das variveis de input
 #     if not isinstance(labels, np.ndarray):
-#         raise ValueError("A variável `labels` deve ser do tipo np.array")
+#         raise ValueError("A varivel `labels` deve ser do tipo np.array")
 #     elif not isinstance(values, np.ndarray):
-#         raise ValueError("A variável `values` deve ser do tipo np.array")
+#         raise ValueError("A varivel `values` deve ser do tipo np.array")
 #     elif not isinstance(intervalos, np.ndarray):
-#         raise ValueError("A variável `intervalos` deve ser do tipo np.array")
+#         raise ValueError("A varivel `intervalos` deve ser do tipo np.array")
 #     elif not isinstance(legends, np.ndarray):
-#         raise ValueError("A variável `legends` deve ser do tipo np.array")
+#         raise ValueError("A varivel `legends` deve ser do tipo np.array")
 
 #     # Parâmetros default
 #     x_label = kwargs.get("x_label", "Eixo X")
 #     y_label = kwargs.get("y_label", "Eixo Y")
-#     title = kwargs.get("title", "Gráfico de Barras")
+#     title = kwargs.get("title", "grafico de Barras")
 #     show_num = kwargs.get("show_num", False)
 
 #     fig = go.Figure()
@@ -351,9 +351,9 @@ def plot_bar_simple(**kwargs):
 #     return fig
 
 
-# def plot_bar_simple(**kwargs):
+# def plot_bar(**kwargs):
 #     """
-#     Cria um gráfico de barras simples com intervalos de confiança.
+#     Cria um grafico de barras simples com intervalos de confiança.
 
 #     Args Obrigatórios:
 #         values (np.ndarray): Valores das barras.
@@ -363,27 +363,27 @@ def plot_bar_simple(**kwargs):
 #         labels (np.ndarray): Rótulos das barras.
 #         x_label (str): Legenda do eixo X.
 #         y_label (str): Legenda do eixo Y.
-#         title (str): Título do gráfico.
+#         title (str): Titulo do grafico.
 #         show_num (bool): Se True, exibe os valores acima das barras.
 
 #     Retorna:
-#         fig (go.Figure): Figura plotly com o gráfico de barras.
+#         fig (go.Figure): Figura plotly com o grafico de barras.
 #     """
 #     # Parâmetros Obrigatórios
 #     values = kwargs.get("values")
 #     intervalos = kwargs.get("intervalos")
 
-#     # Verifica tipo das variáveis de input
+#     # Verifica tipo das variveis de input
 #     if not isinstance(values, np.ndarray):
-#         raise ValueError("A variável `values` deve ser do tipo np.array")
+#         raise ValueError("A varivel `values` deve ser do tipo np.array")
 #     elif not isinstance(intervalos, np.ndarray):
-#         raise ValueError("A variável `intervalos` deve ser do tipo np.array")
+#         raise ValueError("A varivel `intervalos` deve ser do tipo np.array")
 
 #     # Parâmetros default
 #     labels = kwargs.get("labels", np.array(['']))
 #     x_label = kwargs.get("x_label", "Eixo X")
 #     y_label = kwargs.get("y_label", "Eixo Y")
-#     title = kwargs.get("title", "Gráfico de Barras")
+#     title = kwargs.get("title", "grafico de Barras")
 #     show_num = kwargs.get("show_num", False)
 
 #     ymax = (values + intervalos).max() * 1.2

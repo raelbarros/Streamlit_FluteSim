@@ -1,5 +1,5 @@
 import numpy as np
-from src.utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar
 
 
 #ARQUIVO: generalDroneData
@@ -12,7 +12,7 @@ def _calculate_interval(series):
     return interval
 
 
-def calculate_duration_successful_trips(df):
+def calculate_duration_successful_trips_per_execution(df):
     """
     Calcula a duraçao média das viagens com sucesso por execuçao.
 
@@ -52,51 +52,53 @@ def calculate_duration_successful_trips(df):
     }
 
 
-def plot_duration_successful_trips(data_list, labels=None):
+def plot_duration_successful_trips_per_execution(data_list, labels=None):
     """
     Gera o grafico da duraçao média das viagens com sucesso por execuçao.
 
     Args:
         data_list (list or dict): Dados calculados pela funçao calculate_duration_successful_trips.
         labels (list, optional): Lista de nomes das simulaçoes.
-        show_confidence_interval (bool): Se True, exibe os intervalos de confiança.
 
     Returns:
         Figure: Objeto de figura Plotly.
     """
     if not isinstance(data_list, list):
         data_list = [data_list]
-        if labels is None:
-            labels = ["Simulaçao"]
+
     
     if labels is None:
         labels = [f"Simulaçao {i+1}" for i in range(len(data_list))]
 
     # Obter todas as execuçoes unicas
     all_execucoes = sorted(set(exec_num for data in data_list for exec_num in data['execucoes']))
-    num_exec = [str(exec_num) for exec_num in all_execucoes]
+    list_exec = [str(exec_num) for exec_num in all_execucoes]
 
     # Preparar os valores para cada simulaçao
     values_list = []
     intervalos_list = []
+    
     for data in data_list:
+        
         # Mapear execuçoes para médias e intervalos
         exec_media_dict = dict(zip(data['execucoes'], data['media']))
-        exec_intervalo_dict = dict(zip(data['execucoes'], data['intervalo']))
         # Obter os valores na ordem de all_execucoes
         series_values = [exec_media_dict.get(exec_num, 0) for exec_num in all_execucoes]
-        series_intervalos = [exec_intervalo_dict.get(exec_num, 0) for exec_num in all_execucoes]
         values_list.append(series_values)
+        
+        # Intervalos sao zeros
+        series_intervalos = [0] * len(all_execucoes)
         intervalos_list.append(series_intervalos)
 
-    # Chama a funçao plot_bar_simple
-    fig = plot_bar_simple(
+    # Chama a funçao plot_bar
+    fig = plot_bar(
         values=values_list,
         intervalos=intervalos_list,
-        labels=num_exec,
+        labels=list_exec,
         x_label='Execuçao',
         y_label='Tempo (s)',
-        title='Duraçao das Viagens com Sucesso por Execuçao'
+        title='Duraçao das Viagens com Sucesso por Execuçao',
+        show_interval=False
     )
     # Atualizar os nomes das séries
     for i, sim_name in enumerate(labels):

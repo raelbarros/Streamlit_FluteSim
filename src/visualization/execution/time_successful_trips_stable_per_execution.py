@@ -6,7 +6,7 @@ import plotly.express as px
 #ARQUIVO: generalDroneData
 
 
-def calculate_time_successful_trips_stable(df):
+def calculate_time_successful_trips_stable_per_execution(df):
     """
     Processes the DataFrame to filter outliers in the total travel time of drones during the stable period.
 
@@ -36,7 +36,7 @@ def calculate_time_successful_trips_stable(df):
     return filtered_travel_times
 
 
-def plot_time_successful_trips_stable(data_list, labels=None):
+def plot_time_successful_trips_stable_per_execution(data_list, labels=None):
     """
     Generates a histogram of travel times without outliers for one or multiple simulations.
 
@@ -51,8 +51,7 @@ def plot_time_successful_trips_stable(data_list, labels=None):
 
     if not isinstance(data_list, list):
         data_list = [data_list]
-        if labels is None:
-            labels = [""]
+
     if labels is None:
         labels = [f"Simulacao {i+1}" for i in range(len(data_list))]
 

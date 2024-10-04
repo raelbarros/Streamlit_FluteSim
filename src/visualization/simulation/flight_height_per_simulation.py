@@ -54,12 +54,12 @@ def plot_flight_height(data_list, labels=None):
 
         df_max = pd.DataFrame({
             'Altitude': df_max,
-            'Tipo': 'Máxima',
+            'Tipo': 'Mxima',
             'Simulacao': sim_name
         })
         df_min = pd.DataFrame({
             'Altitude': df_min,
-            'Tipo': 'Mínima',
+            'Tipo': 'Minima',
             'Simulacao': sim_name
         })
 
@@ -74,7 +74,7 @@ def plot_flight_height(data_list, labels=None):
         x='Tipo',
         y='Altitude',
         color='Simulacao',
-        title='Altura de Voo Máxima e Mínima',
+        title='Altura de Voo Mxima e Minima',
         labels=labels
     )
 

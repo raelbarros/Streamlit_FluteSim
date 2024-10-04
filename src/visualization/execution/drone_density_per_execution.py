@@ -1,5 +1,5 @@
 import numpy as np
-from src.utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar
 
 # ARQUIVO: generalSimulationData
 
@@ -38,8 +38,6 @@ def plot_drone_density_per_execution(data_list, labels=None):
     """
     if not isinstance(data_list, list):
         data_list = [data_list]
-        if labels is None:
-            labels = ["Simulaçao"]
     
     if labels is None:
         labels = [f"Simulaçao {i+1}" for i in range(len(data_list))]
@@ -51,18 +49,21 @@ def plot_drone_density_per_execution(data_list, labels=None):
     # Preparar os valores para cada simulaçao
     values_list = []
     intervalos_list = []
+    
     for data in data_list:
         # Criar um dicionario para mapear execuçoes para numero de drones
         exec_num_drones_dict = dict(zip(data['execucoes'], data['num_drones']))
+        
         # Obter os valores na ordem de all_execucoes
         series_values = [exec_num_drones_dict.get(exec_num, 0) for exec_num in all_execucoes]
         values_list.append(series_values)
+        
         # Intervalos sao zeros
         series_intervalos = [0] * len(all_execucoes)
         intervalos_list.append(series_intervalos)
 
-    # Chama a funçao plot_bar_simple
-    fig = plot_bar_simple(
+    # Chama a funçao plot_bar
+    fig = plot_bar(
         values=values_list,
         intervalos=intervalos_list,
         labels=num_exec,

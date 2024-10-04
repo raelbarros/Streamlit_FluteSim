@@ -1,4 +1,4 @@
-from src.utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar
 import numpy as np
 
 
@@ -66,7 +66,7 @@ def calculate_collisions_per_situation(df):
     # Remover linhas com situaçao NaN
     df = df.dropna(subset=["situacao"])
 
-    # Agrupar por execuçao e situaçao, contando ocorrências
+    # Agrupar por execuçao e situaçao, contando ocorrencias
     df_grouped = df.groupby(["Numero da execucao", "situacao"]).size().unstack(fill_value=0)
 
     # Preencher colunas ausentes com zero
@@ -114,8 +114,6 @@ def plot_collisions_per_situation(data_list, labels=None):
     """
     if not isinstance(data_list, list):
         data_list = [data_list]
-        if labels is None:
-            labels = ["Simulaçao"]
     
     if labels is None:
         labels = [f"Simulaçao {i+1}" for i in range(len(data_list))]
@@ -125,8 +123,8 @@ def plot_collisions_per_situation(data_list, labels=None):
     values_list = [data['media_categorias'] for data in data_list]
     intervalos_list = [data['intervalo_confianca_categorias'] for data in data_list]
 
-    # Chama a funçao plot_bar_simple modificada para suportar multiplas séries
-    fig = plot_bar_simple(
+    # Chama a funçao plot_bar modificada para suportar multiplas séries
+    fig = plot_bar(
         values=values_list,
         intervalos=intervalos_list,
         labels=categorias,

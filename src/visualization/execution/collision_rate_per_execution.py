@@ -1,5 +1,5 @@
 import numpy as np
-from src.utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar
 
 # ARQUIVO: generalSimulationData
 
@@ -36,7 +36,7 @@ def calculate_collision_rate_per_execution(df):
 
 def plot_collision_rate_per_execution(data_list, labels=None):
     """
-    Gera o grafico da taxa de colisao por execuçao usando plot_bar_simple.
+    Gera o grafico da taxa de colisao por execuçao usando plot_bar.
 
     Args:
         data_list (list): Lista de dicionarios, cada um contendo 'execucoes' e 'taxa_colisao' para uma simulaçao.
@@ -47,8 +47,6 @@ def plot_collision_rate_per_execution(data_list, labels=None):
     """
     if not isinstance(data_list, list):
         data_list = [data_list]
-        if labels is None:
-            labels = ["Simulaçao"]
     
     if labels is None:
         labels = [f"Simulaçao {i+1}" for i in range(len(data_list))]
@@ -60,18 +58,21 @@ def plot_collision_rate_per_execution(data_list, labels=None):
     # Preparar os valores e intervalos para cada simulaçao
     values_list = []
     intervalos_list = []
+    
     for data in data_list:
         # Criar um dicionario para mapear execuçoes para taxas de colisao
         exec_taxa_dict = dict(zip(data['execucoes'], data['taxa_colisao']))
+        
         # Obter os valores na ordem de all_execucoes
         series_values = [exec_taxa_dict.get(exec_num, 0) for exec_num in all_execucoes]
         values_list.append(series_values)
+        
         # Intervalos sao zeros
         series_intervalos = [0] * len(all_execucoes)
         intervalos_list.append(series_intervalos)
 
-    # Chamar a funçao plot_bar_simple
-    fig = plot_bar_simple(
+    # Chamar a funçao plot_bar
+    fig = plot_bar(
         values=values_list,
         intervalos=intervalos_list,
         labels=list_exec,

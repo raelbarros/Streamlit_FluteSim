@@ -19,7 +19,7 @@ def configure_page():
     st.title("Drone Simulation Dashboard")
     st.markdown("""
         Bem-vindo ao dashboard de simulação de drones! 
-        Aqui você pode enviar os dados da sua simulação, e gerar graficos analíticos para entender o desempenho dos seus drones.
+        Aqui voce pode enviar os dados da sua simulação, e gerar graficos analiticos para entender o desempenho dos seus drones.
         **Siga os passos abaixo**:
         1. Escolha o tipo de analise que deseja realizar.
         2. Faça o upload dos arquivos CSV no menu lateral.
@@ -60,9 +60,9 @@ def sidebar_menu():
                 st.divider()
                 st.subheader(f"Informaçoes da Simulação {i+1} 👇")
                 name = st.text_input(
-                    f"Título da Simulação {i+1}, ex: 12/60", 
+                    f"Titulo da Simulação {i+1}, ex: 12/60", 
                     key=f"name_{i}", 
-                    placeholder="Digite um título para a simulação"
+                    placeholder="Digite um titulo para a simulação"
                 )
                 files = st.file_uploader(
                     f"Upload dos dados da Simulação {i+1}", type="csv", accept_multiple_files=True, key=f"uploader_{i}"
