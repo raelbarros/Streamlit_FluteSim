@@ -17,13 +17,13 @@ def calculate_confidence_interval(series):
 
 def calculate_duration_successful_trips_per_simulation(df):
     """
-    Calculates the average duration of successful trips for the simulation.
+    Calcula a media de duraçao das viagem 
 
     Args:
-        df (DataFrame): DataFrame containing drone data.
+        df (DataFrame): DF contendo os dados
 
     Returns:
-        dict: Dictionary containing 'media', 'desvio_padrao', and 'intervalo'.
+        dict: Dict contendo 'media', 'desvio_padrao', and 'intervalo'.
     """
     df.columns = df.columns.str.strip()
     df = df.dropna(subset=["drone ID", "tempo de viagem total dos drones no tempo estavel"])
@@ -43,14 +43,14 @@ def calculate_duration_successful_trips_per_simulation(df):
 
 def plot_duration_successful_trips_per_simulation(data, labels=None):
     """
-    Generates a bar chart of the average duration of successful trips per simulation.
+    Gera grafico de barras com a duração media das viagens
 
     Args:
-        data_list (list): List of dictionaries calculated by the calculate_duration_successful_trips function.
-        labels (list, optional): List of labels for the simulations.
+        data_list (list): Lista de valores calculados por calculate_duration_successful_trips function.
+        labels (list, optional): Listas de nomes da simulaçao.
 
     Returns:
-        Figure: Plotly figure object.
+        Figure: Objeto de figura Plotly
     """
     if isinstance(data, dict):
         media = np.array([data['media']])
@@ -63,7 +63,7 @@ def plot_duration_successful_trips_per_simulation(data, labels=None):
         intervalo = np.array([d['intervalo'] for d in data])
         labels = labels or [f"Simulaçao {i+1}" for i in range(len(data))]
 
-    # Call the plot_bar function
+    # Chama funcao de plot
     fig = plot_bar(
         values=media,
         intervalos=intervalo,

@@ -8,29 +8,29 @@ import plotly.express as px
 
 def calculate_time_successful_trips_stable_per_execution(df):
     """
-    Processes the DataFrame to filter outliers in the total travel time of drones during the stable period.
+    Processa dataframe e filtra outliers de tempo de viagem total no tempo estavel
 
     Args:
-        df (DataFrame): DataFrame containing drone data.
+        df (DataFrame): DF contendo os dados
 
     Returns:
-        Series: Filtered Series of travel times without outliers.
+        Series: Dados filtrados sem os outliers.
     """
     df.columns = df.columns.str.strip()
 
-    # Select the relevant column
+    # Seleciona coluna relevante
     travel_times = df['tempo de viagem total dos drones no tempo estavel'].dropna()
 
-    # Calculate Interquartile Range (IQR)
+    # Calcula Interquartile Range (IQR)
     Q1 = travel_times.quantile(0.25)
     Q3 = travel_times.quantile(0.75)
     IQR = Q3 - Q1
 
-    # Define the limits to identify outliers
+    # Define os limites de outliers
     lower_limit = Q1 - 1.5 * IQR
     upper_limit = Q3 + 1.5 * IQR
 
-    # Filter the data to remove outliers
+    # Filtra os dados pelo limites
     filtered_travel_times = travel_times[(travel_times >= lower_limit) & (travel_times <= upper_limit)]
 
     return filtered_travel_times
@@ -38,14 +38,14 @@ def calculate_time_successful_trips_stable_per_execution(df):
 
 def plot_time_successful_trips_stable_per_execution(data_list, labels=None):
     """
-    Generates a histogram of travel times without outliers for one or multiple simulations.
+    Gera histograma de tempo de viagem para as simulaçoes.
 
     Args:
-        data_list (list): List of Series returned by calculate_time_successful_trips_stable.
-        labels (list, optional): List of simulation names.
+        data_list (list): Lista de dados calculados por calculate_time_successful_trips_stable
+        labels (list, optional): Listas de nomes da simulaçao.
 
     Returns:
-        Figure: Plotly Figure object with the histogram.
+        Figure: Objeto de figura Plotly
     """
 
 
@@ -55,7 +55,7 @@ def plot_time_successful_trips_stable_per_execution(data_list, labels=None):
     if labels is None:
         labels = [f"Simulacao {i+1}" for i in range(len(data_list))]
 
-    # Prepare the data for plotting
+    # Prepara df para plot
     data_frames = []
     for data, sim_name in zip(data_list, labels):
         df = pd.DataFrame({
@@ -66,7 +66,7 @@ def plot_time_successful_trips_stable_per_execution(data_list, labels=None):
 
     df_all = pd.concat(data_frames, ignore_index=True)
 
-    # Create the histogram
+    # Criacaçao do grafico
     labels={'Tempo de Viagem': 'Tempo (s)'}
 
     fig = plot_histogram(

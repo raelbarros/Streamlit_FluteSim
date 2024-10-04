@@ -5,13 +5,13 @@ import pandas as pd
 
 def calculate_flight_height(df):
     """
-    Extracts the maximum and minimum flight altitudes from the DataFrame.
+    Coleta altitude maxima e minima o DF
 
     Args:
-        df (DataFrame): DataFrame containing drone flight data.
+        df (DataFrame): DF com os dados de voou.
 
     Returns:
-        dict: Dictionary containing 'max_altitude' and 'min_altitude' Series.
+        dict: Dict contendo 'max_altitude' e 'min_altitude'
     """
     df.columns = df.columns.str.strip()
 
@@ -29,14 +29,14 @@ def calculate_flight_height(df):
 
 def plot_flight_height(data_list, labels=None):
     """
-    Generates a box plot of flight heights for one or multiple simulations.
-
+    Gera boxsplot de altura de voo 
+    
     Args:
-        data_list (list): List of dictionaries returned by calculate_flight_height.
-        labels (list, optional): List of simulation names.
+        data_list (list): Lista de valores calculados por calculate_flight_height.
+        labels (list, optional): Listas de nomes da simulaçao.
 
     Returns:
-        Figure: Plotly Figure object with the box plot.
+        Figure: Objeto de figura Plotly
     """
 
     if not isinstance(data_list, list):
@@ -46,7 +46,7 @@ def plot_flight_height(data_list, labels=None):
     if labels is None:
         labels = [f"Simulacao {i+1}" for i in range(len(data_list))]
 
-    # Prepare the data for plotting
+    # Prepara df para plot
     data_frames = []
     for data, sim_name in zip(data_list, labels):
         df_max = data['max_altitude']
@@ -68,6 +68,7 @@ def plot_flight_height(data_list, labels=None):
 
     df_all = pd.concat(data_frames, ignore_index=True)
 
+    # Criacaçao do grafico
     labels={'Tipo': 'Tipo de Altitude', 'Altitude': 'Altitude (m)'}
     fig = plot_boxsplot(
         df_all,

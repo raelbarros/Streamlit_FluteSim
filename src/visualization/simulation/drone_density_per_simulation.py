@@ -41,14 +41,6 @@ def plot_drone_density_per_simulation(data, labels=None):
     Returns:
         Figure: Objeto de figura Plotly.
     """
-    # if not isinstance(data_list, list):
-    #     data_list = [data_list]
-    
-    # if labels is None:
-    #     labels = [f"Simulaçao {i+1}" for i in range(len(data_list))]
-
-    # values = [data['media'] for data in data_list]
-    # intervalos = [data['intervalo'] for data in data_list]
 
     if isinstance(data, dict):
         media = np.array([data['media']])

@@ -100,6 +100,7 @@ def plot_duration_successful_trips_per_execution(data_list, labels=None):
         title='Duraçao das Viagens com Sucesso por Execuçao',
         show_interval=False
     )
+    
     # Atualizar os nomes das series
     for i, sim_name in enumerate(labels):
         fig.data[i].name = sim_name
