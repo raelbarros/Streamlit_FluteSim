@@ -1,13 +1,13 @@
 import numpy as np
 import plotly.graph_objs as go
-from scipy.stats import gaussian_kde
 import plotly.io as pio
+import plotly.express as px
 
 
 pio.templates.default = 'gridon'
 
 
-def plot_boxsplot(title, labels, *args):
+def plot_boxsplot(df, title, x, y, color, labels):
     """
     Cria um boxplot usando plotly.
 
@@ -19,71 +19,34 @@ def plot_boxsplot(title, labels, *args):
     Retorna:
         fig (go.Figure): Figura plotly com o boxplot.
     """
-    fig = go.Figure()
 
-    for i, x in enumerate(args):
-        fig.add_trace(go.Box(y=x, name=labels[i]))
-
-    fig.update_layout(
+    fig = px.box(
+        df,
+        x=x,
+        y=y,
+        color=color,
         title=title,
-        xaxis_title='',
-        yaxis_title='',
-        yaxis_tickfont_size=12,
-        xaxis_tickfont_size=12,
-        xaxis_tickvals=labels,
-        showlegend=False
+        labels=labels
     )
 
     return fig
 
 
 
-def plot_histogram(df, x_label, y_label, title):
+def plot_histogram(df, title, x, color, labels):
     """
     Cria um histograma com contagens e sobrepõe a curva KDE escalada para as contagens.
     """
-    # Converter e limpar os dados
-    data = np.asarray(df)
-    data = data[np.isfinite(data)]  # Remove NaNs e Infs
 
-    if data.size == 0:
-        raise ValueError("O conjunto de dados está vazio após a remoção de valores não finitos.")
-
-    # Calcular o histograma (com contagens)
-    counts, bins = np.histogram(data, bins=20)
-    bin_centers = (bins[:-1] + bins[1:]) / 2
-
-    hist = go.Bar(
-        x=bin_centers,
-        y=counts,
-        name='Dados'
-    )
-
-    # Calcular a curva de densidade (KDE)
-    kde = gaussian_kde(data)
-    x_vals = np.linspace(data.min(), data.max(), 1000)
-    kde_vals = kde(x_vals)
-
-    # Escalar a KDE para corresponder às contagens do histograma
-    kde_scaled = kde_vals * data.size * (bins[1] - bins[0])
-
-    kde_line = go.Scatter(
-        x=x_vals,
-        y=kde_scaled,
-        mode='lines',
-        name='Densidade',
-        line=dict(color='red', width=2)
-    )
-
-    # Criar a figura e adicionar os traços
-    fig = go.Figure(data=[hist, kde_line])
-
-    # Atualizar o layout
-    fig.update_layout(
+    fig = px.histogram(
+        df,
+        x=x,
+        color=color,
         title=title,
-        xaxis_title=x_label,
-        yaxis_title=y_label,
-        bargap=0.1
+        labels=labels,
+        barmode='overlay',
+        nbins=50,
+        opacity=0.75
     )
 
     return fig
@@ -118,7 +81,6 @@ def plot_bar_simple(values, intervalos=None, labels=None, x_label="Eixo X", y_la
             series_name = f"Série {i+1}"
 
             error_y = dict(type='data', array=series_intervalos, visible=True) if show_interval and series_intervalos is not None else None
-
 
             fig.add_trace(go.Bar(
                 x=labels,

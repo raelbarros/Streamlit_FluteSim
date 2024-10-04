@@ -1,22 +1,24 @@
 import streamlit as st
 import pandas as pd
 
-from src.exposition.simple.collision_rate_per_execution import collision_rate_per_execution
-from src.exposition.simple.time_successful_trips_stable import time_successful_trips_stable
-from src.exposition.simple.flight_height import boxsplot_flight_height
-from src.exposition.simple.collisions_per_situation import collisions_per_situation
-from src.exposition.simple.duration_successful_trips import duration_successful_trips
-from src.exposition.simple.drone_density_per_execution import drone_density_per_execution
-
 #MIGRANDO
 from src.visualization.collision_rate import calculate_collision_rate, plot_collision_rate
 from src.visualization.collision_rate_per_execution import calculate_collision_rate_per_execution, plot_collision_rate_per_execution
-
+from src.visualization.collisions_per_situation import calculate_collisions_per_situation, plot_collisions_per_situation
+from src.visualization.drone_density_per_execution import calculate_drone_density_per_execution, plot_drone_density_per_execution
+from src.visualization.duration_successful_trips import calculate_duration_successful_trips, plot_duration_successful_trips
+from src.visualization.flight_height import calculate_flight_height, plot_flight_height
+from src.visualization.time_successful_trips_stable import calculate_time_successful_trips_stable, plot_time_successful_trips_stable
 
 
 # Mapeamento dos nomes de arquivos com as funçoes correspondentes
 MAP_FUNCTIONS = {
-    # 'droneCollisionData': [collisions_per_situation],
+    'droneCollisionData': [
+        {
+            'function_name': calculate_collisions_per_situation,
+            'plot': plot_collisions_per_situation,
+        },
+    ],
     'generalSimulationData': [
         {
             'function_name': calculate_collision_rate,
@@ -26,8 +28,25 @@ MAP_FUNCTIONS = {
             'function_name': calculate_collision_rate_per_execution,
             'plot': plot_collision_rate_per_execution,
         },
+        {
+            'function_name': calculate_drone_density_per_execution,
+            'plot': plot_drone_density_per_execution,
+        },
     ],
-    # 'generalDroneData': [time_successful_trips_stable, duration_successful_trips, boxsplot_flight_height],
+    'generalDroneData': [
+        {
+            'function_name': calculate_duration_successful_trips,
+            'plot': plot_duration_successful_trips,
+        },
+        {
+            'function_name': calculate_flight_height,
+            'plot': plot_flight_height,
+        },
+        {
+            'function_name': calculate_time_successful_trips_stable,
+            'plot': plot_time_successful_trips_stable,
+        },
+    ],
 }
 
 
@@ -57,6 +76,7 @@ def _display_plots(file, functions):
             # Gerar e exibir o grafico
             if fig:
                 st.plotly_chart(fig)
+                st.divider()
             else:
                 st.warning(f"A função {func_name} não retornou um grafico.")
 

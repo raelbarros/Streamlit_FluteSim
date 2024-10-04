@@ -4,11 +4,21 @@ import pandas as pd
 # Importando as funçoes de cada grafico
 from src.visualization.collision_rate import calculate_collision_rate, plot_collision_rate
 from src.visualization.collision_rate_per_execution import calculate_collision_rate_per_execution, plot_collision_rate_per_execution
+from src.visualization.collisions_per_situation import calculate_collisions_per_situation, plot_collisions_per_situation
+from src.visualization.drone_density_per_execution import calculate_drone_density_per_execution, plot_drone_density_per_execution
+from src.visualization.duration_successful_trips import calculate_duration_successful_trips, plot_duration_successful_trips
+from src.visualization.flight_height import calculate_flight_height, plot_flight_height
+from src.visualization.time_successful_trips_stable import calculate_time_successful_trips_stable, plot_time_successful_trips_stable
 
 
 # Mapeamento dos nomes de arquivos com as funçoes correspondentes
 MAP_FUNCTIONS = {
-    'droneCollisionData': [],
+    'droneCollisionData': [
+        {
+            'function_name': calculate_collisions_per_situation,
+            'plot': plot_collisions_per_situation,
+        },
+    ],
     'generalSimulationData': [
         {
             'function_name': calculate_collision_rate,
@@ -18,8 +28,25 @@ MAP_FUNCTIONS = {
             'function_name': calculate_collision_rate_per_execution,
             'plot': plot_collision_rate_per_execution,
         },
+        {
+            'function_name': calculate_drone_density_per_execution,
+            'plot': plot_drone_density_per_execution,
+        },
     ],
-    'generalDroneData': [],
+    'generalDroneData': [
+        {
+            'function_name': calculate_duration_successful_trips,
+            'plot': plot_duration_successful_trips,
+        },
+        {
+            'function_name': calculate_flight_height,
+            'plot': plot_flight_height,
+        },
+        {
+            'function_name': calculate_time_successful_trips_stable,
+            'plot': plot_time_successful_trips_stable,
+        },
+    ],
 }
 
 def process_simulation_files(simulation):
@@ -50,6 +77,7 @@ def process_simulation_files(simulation):
                     plot_func = func_dict['plot']
                     
                     func_name = calc_func.__name__
+                    plot_func_name = plot_func.__name__
                     
                     try:
                         value = calc_func(df)
@@ -58,7 +86,7 @@ def process_simulation_files(simulation):
                             'file_name': file.name,
                             'function_name': func_name,
                             'value': value,
-                            'plot_function': plot_func 
+                            'plot_function': plot_func_name
                         }
                         results.append(result)
                     
@@ -93,7 +121,6 @@ def aggregate_results(all_results):
 
     for tab, file_name in zip(tabs, files_name):
         with tab:
-            st.header(f"Gráficos para o arquivo: {file_name}")
 
             # Filtra os resultados para este arquivo
             df_file = results_df[results_df['file_name'] == file_name]
@@ -107,14 +134,21 @@ def aggregate_results(all_results):
                 if not df_func.empty:
                     st.subheader(f"Análise: {func_name.replace('_', ' ').capitalize()}")
 
-                    # Extrair os valores e labels
+                    # Extrair os valores
                     data = df_func['value'].tolist()
                     labels = df_func['simulation_name'].tolist()
-                    plot_func = df_func['plot_function'].iloc[0]
+                    plot_func_name = df_func['plot_function'].iloc[0]
 
                     # Gerar e exibir o gráfico
+                    plot_func = globals()[plot_func_name]
+                    
                     fig = plot_func(data, labels=labels)
-                    st.plotly_chart(fig)
+                    # Gerar e exibir o grafico
+                    if fig:
+                        st.plotly_chart(fig)
+                        st.divider()
+                    else:
+                        st.warning(f"A função {func_name} não retornou um grafico.")
                 else:
                     st.write(f"Nenhum dado disponível para a análise {func_name}.")
 

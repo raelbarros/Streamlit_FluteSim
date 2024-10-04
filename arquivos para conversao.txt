@@ -1,9 +1,23 @@
--plot_number_of_collisions_per_situation_poisson = ok
--plot_number_of_deviation_state_at_collision_poisson = CSV de ML nao coleta estado de desvio
--plot_time_of_successful_trips_stable = ok
--plot_number_of_detected_drones_at_collision_poisson = não tem esfera para coletar info de raio de colisao
--plot_drone_density = ok
--plot_average_density_successful_trips_collisions = não achei coluna (número de viagens com sucesso por intervalo)
--plot_percentage_of_collisions_poisson_several_altitudes = não entendi script
--plot_achieved_altitudes_poisson_altitudes = Não achei colunas no rotulo(1027:1086)
-plot_markov_collision_probability = Script incompleto
+-*plot_number_of_collisions_per_situation_poisson* = ok
+
+-*plot_number_of_deviation_state_at_collision_poisson* = 
+    CSV de ML nao coleta estado de desvio
+
+-*plot_time_of_successful_trips_stable* = ok
+
+-*plot_number_of_detected_drones_at_collision_poisson* = 
+    No CSV de ML ele nao existe a esfera para para coletar info de raio de colisao
+
+-*plot_drone_densit* = ok
+
+-*plot_average_density_successful_trips_collisions* = 
+    No script script do matlab ele le a coluna 965, não achei a equivalente no CSV
+
+-*plot_percentage_of_collisions_poisson_several_altitudes* = 
+    No script ele pega as colunas (1026:1027), nas no arquivo de rotulos eu nao achei informações sobre essas colunas
+
+-*plot_achieved_altitudes_poisson_altitudes* = 
+    No script de matlab ele pega as colunas (1027:1086), nas no arquivo de rotulos eu nao achei informações sobre essas colunas
+
+-*plot_markov_collision_probability* = 
+    Não entendi o script
