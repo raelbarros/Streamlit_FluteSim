@@ -1,4 +1,4 @@
-from utils.graph_plotly import plot_histogram, plot_boxsplot
+from src.utils.graph_plotly import plot_histogram, plot_boxsplot
 
 # ARQUIVO: generalDroneData_12
 

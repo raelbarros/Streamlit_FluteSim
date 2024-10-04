@@ -1,5 +1,5 @@
 import numpy as np
-import plotly.graph_objects as go
+import plotly.graph_objs as go
 from scipy.stats import gaussian_kde
 import plotly.io as pio
 
@@ -88,17 +88,15 @@ def plot_histogram(df, x_label, y_label, title):
 
     return fig
 
-def plot_bar_group(**kwargs):
+
+def plot_bar_simple(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Eixo Y", title="Gráfico de Barras", show_num=False, show_interval=True):
     """
-    Cria um gráfico de barras agrupadas com intervalos de confiança.
+    Cria um gráfico de barras (simples ou agrupado) com intervalos de confiança.
 
-    Args Obrigatórios:
-        labels (np.ndarray): Rótulos do eixo X.
-        values (np.ndarray): Valores das barras. Deve ser um array 2D.
-        intervalos (np.ndarray): Intervalos de confiança para as barras. Deve ser um array 2D.
-        legends (np.ndarray): Legendas para cada grupo de barras.
-
-    Args Opcionais:
+    Args:
+        values (np.ndarray or list of np.ndarray): Valores das barras. Pode ser um array para barras simples ou uma lista de arrays para barras agrupadas.
+        intervalos (np.ndarray or list of np.ndarray): Intervalos de confiança para cada barra ou grupo de barras.
+        labels (np.ndarray): Rótulos das barras (para o eixo X).
         x_label (str): Legenda do eixo X.
         y_label (str): Legenda do eixo Y.
         title (str): Título do gráfico.
@@ -107,101 +105,41 @@ def plot_bar_group(**kwargs):
     Retorna:
         fig (go.Figure): Figura plotly com o gráfico de barras.
     """
-    labels = kwargs.get("labels")
-    values = kwargs.get("values")
-    intervalos = kwargs.get("intervalos")
-    legends = kwargs.get("legends")
+    # Verifica se values é uma lista (barras agrupadas) ou um array (barras simples)
+    if isinstance(values, list):
+        num_series = len(values)
+        if labels is None:
+            raise ValueError("Para barras agrupadas, 'labels' deve ser fornecido.")
 
-    # Verifica tipo das variáveis de input
-    if not isinstance(labels, np.ndarray):
-        raise ValueError("A variável `labels` deve ser do tipo np.array")
-    elif not isinstance(values, np.ndarray):
-        raise ValueError("A variável `values` deve ser do tipo np.array")
-    elif not isinstance(intervalos, np.ndarray):
-        raise ValueError("A variável `intervalos` deve ser do tipo np.array")
-    elif not isinstance(legends, np.ndarray):
-        raise ValueError("A variável `legends` deve ser do tipo np.array")
+        fig = go.Figure()
+        for i in range(num_series):
+            series_values = values[i]
+            series_intervalos = intervalos[i] if isinstance(intervalos, list) else intervalos
+            series_name = f"Série {i+1}"
 
-    # Parâmetros default
-    x_label = kwargs.get("x_label", "Eixo X")
-    y_label = kwargs.get("y_label", "Eixo Y")
-    title = kwargs.get("title", "Gráfico de Barras")
-    show_num = kwargs.get("show_num", False)
+            error_y = dict(type='data', array=series_intervalos, visible=True) if show_interval and series_intervalos is not None else None
 
-    fig = go.Figure()
 
-    x = labels
-    ymax = (values + intervalos).max() * 1.2
-
-    # Plotando as barras para cada subcategoria
-    for i, (subcategory, val, err) in enumerate(zip(legends, values, intervalos)):
-        fig.add_trace(go.Bar(
-            x=x,
-            y=val,
-            name=subcategory,
-            error_y=dict(type='data', array=err, visible=True),
-            offsetgroup=i,
-            text=val if show_num else None,
+            fig.add_trace(go.Bar(
+                x=labels,
+                y=series_values,
+                name=series_name,
+                error_y=error_y,
+                text=series_values if show_num else None,
+                textposition='outside' if show_num else None
+            ))
+        fig.update_layout(barmode='group')
+    else:
+        # Gráfico de barras simples
+        fig = go.Figure(go.Bar(
+            x=labels,
+            y=values,
+            error_y=dict(type='data', array=intervalos, visible=True),
+            text=values if show_num else None,
             textposition='outside' if show_num else None
         ))
 
-    # Atualizar layout
-    fig.update_layout(
-        title=title,
-        xaxis_title=x_label,
-        yaxis_title=y_label,
-        barmode='group',
-        yaxis=dict(range=[0, ymax]),
-        legend_title_text='Legenda'
-    )
-
-    return fig
-
-
-def plot_bar_simple(**kwargs):
-    """
-    Cria um gráfico de barras simples com intervalos de confiança.
-
-    Args Obrigatórios:
-        values (np.ndarray): Valores das barras.
-        intervalos (np.ndarray): Intervalos de confiança para cada barra.
-
-    Args Opcionais:
-        labels (np.ndarray): Rótulos das barras.
-        x_label (str): Legenda do eixo X.
-        y_label (str): Legenda do eixo Y.
-        title (str): Título do gráfico.
-        show_num (bool): Se True, exibe os valores acima das barras.
-
-    Retorna:
-        fig (go.Figure): Figura plotly com o gráfico de barras.
-    """
-    # Parâmetros Obrigatórios
-    values = kwargs.get("values")
-    intervalos = kwargs.get("intervalos")
-
-    # Verifica tipo das variáveis de input
-    if not isinstance(values, np.ndarray):
-        raise ValueError("A variável `values` deve ser do tipo np.array")
-    elif not isinstance(intervalos, np.ndarray):
-        raise ValueError("A variável `intervalos` deve ser do tipo np.array")
-
-    # Parâmetros default
-    labels = kwargs.get("labels", np.array(['']))
-    x_label = kwargs.get("x_label", "Eixo X")
-    y_label = kwargs.get("y_label", "Eixo Y")
-    title = kwargs.get("title", "Gráfico de Barras")
-    show_num = kwargs.get("show_num", False)
-
-    ymax = (values + intervalos).max() * 1.2
-
-    fig = go.Figure(go.Bar(
-        x=labels,
-        y=values,
-        error_y=dict(type='data', array=intervalos, visible=True),
-        text=values if show_num else None,
-        textposition='outside' if show_num else None
-    ))
+    ymax = (np.array(values).max() + np.array(intervalos).max()) * 1.2
 
     fig.update_layout(
         title=title,

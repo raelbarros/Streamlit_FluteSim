@@ -1,5 +1,5 @@
 import numpy as np
-from utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar_simple
 
 # ARQUIVO: generalSimulationData
 

@@ -1,4 +1,4 @@
-from utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar_simple
 import numpy as np
 
 
@@ -129,7 +129,7 @@ def collisions_per_situation(df):
         labels=labels,
         values=media_categorias,
         intervalos=intervalo_confianca_categorias,
-        title="Número Medio de Colisões por Situação",
+        title="Número Medio de Colisões por situação",
         x_label="Situação",
         y_label="Número de Colisões",
     )

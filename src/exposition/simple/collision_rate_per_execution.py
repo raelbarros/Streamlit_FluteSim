@@ -1,5 +1,5 @@
 import numpy as np
-from utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar_simple
 
 # ARQUIVO: generalSimulationData
 
@@ -22,7 +22,7 @@ def collision_rate_per_execution(df):
         labels=label,
         values=taxa,
         intervalos=list_intervalo,
-        title="Taxa de Colisão por Execução",
+        title="Taxa de Colisão por execução",
         x_label="Simulação",
         y_label="Collision rate (%)",
     )

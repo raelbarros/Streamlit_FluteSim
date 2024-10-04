@@ -1,5 +1,5 @@
 import numpy as np
-from utils.graph_plotly import plot_bar_simple
+from src.utils.graph_plotly import plot_bar_simple
 
 
 #ARQUIVO: generalDroneData
@@ -75,7 +75,7 @@ def duration_successful_trips(df):
         labels=label,
         values=list_media,
         intervalos=list_intervalo,
-        title="Duração de Viagens com Sucesso",
+        title="Duração das Viagens com Sucesso por execução",
         x_label="Simulação",
         y_label="Time (s)",
     )
