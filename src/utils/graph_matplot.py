@@ -112,10 +112,10 @@ def plot_bar(**kwargs):
 
     Args Opcionais:
         labels (np.ndarray): Array com os rotulos das barras.
-        x_label (str, opcional): Legenda do eixo X. Padrão é ''.
-        y_label (str, opcional): Legenda do eixo Y. Padrão é ''.
-        title (str, opcional): Titulo do grafico. Padrão é ''.
-        show_num (bool, opcional): Se True, exibe os valores acima das barras. Padrão é False.
+        x_label (str, opcional): Legenda do eixo X. Padrão e ''.
+        y_label (str, opcional): Legenda do eixo Y. Padrão e ''.
+        title (str, opcional): Titulo do grafico. Padrão e ''.
+        show_num (bool, opcional): Se True, exibe os valores acima das barras. Padrão e False.
 
     Raises:
         ValueError: Se os valores de `label`, `values` e `intervalos` nao forem np.array

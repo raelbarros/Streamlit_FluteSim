@@ -44,13 +44,13 @@ CATEGORIAS = {
 
 def calculate_collisions_per_situation(df):
     """
-    Calcula o numero médio de colisoes por situaçao e por categoria.
+    Calcula o numero medio de colisoes por situaçao e por categoria.
 
     Args:
         df (DataFrame): DataFrame contendo os dados de colisoes.
 
     Returns:
-        dict: Dicionario contendo médias, intervalos de confiança e labels das categorias.
+        dict: Dicionario contendo medias, intervalos de confiança e labels das categorias.
     """
     df.columns = df.columns.str.strip()
 
@@ -72,8 +72,8 @@ def calculate_collisions_per_situation(df):
     # Preencher colunas ausentes com zero
     df_grouped = df_grouped.reindex(columns=range(21), fill_value=0)
 
-    # Calcular médias e desvios padrao por situaçao
-    vetor_medias = df_grouped.mean(axis=0).values  # Média por situaçao
+    # Calcular medias e desvios padrao por situaçao
+    vetor_medias = df_grouped.mean(axis=0).values  # Media por situaçao
     vetor_desvio_padrao = df_grouped.std(axis=0).values  # Desvio padrao por situaçao
     num_execucoes = df_grouped.shape[0]
 
@@ -103,7 +103,7 @@ def calculate_collisions_per_situation(df):
 
 def plot_collisions_per_situation(data_list, labels=None):
     """
-    Gera o grafico do numero médio de colisoes por situaçao.
+    Gera o grafico do numero medio de colisoes por situaçao.
 
     Args:
         data_list (list): Lista de dicionarios retornados por calculate_collisions_per_situation.
@@ -123,7 +123,7 @@ def plot_collisions_per_situation(data_list, labels=None):
     values_list = [data['media_categorias'] for data in data_list]
     intervalos_list = [data['intervalo_confianca_categorias'] for data in data_list]
 
-    # Chama a funçao plot_bar modificada para suportar multiplas séries
+    # Chama a funçao plot_bar modificada para suportar multiplas series
     fig = plot_bar(
         values=values_list,
         intervalos=intervalos_list,

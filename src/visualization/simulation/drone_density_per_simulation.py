@@ -5,7 +5,7 @@ from src.utils.graph_plotly import plot_bar
 
 def calculate_drone_density_per_simulation(df):
     """
-    Calcula a densidade média de drones para a simulação.
+    Calcula a densidade media de drones para a simulação.
 
     Args:
         df (DataFrame): DataFrame contendo os dados da simulação.
@@ -18,7 +18,7 @@ def calculate_drone_density_per_simulation(df):
     # Extrai o numero total de drones lançados em cada execução
     num_drones = df["numero total de drones lancados"].astype(int)
 
-    # Calcula a média, desvio padrão e intervalo de confiança
+    # Calcula a media, desvio padrão e intervalo de confiança
     media = num_drones.mean()
     desvio_padrao = num_drones.std()
     n = num_drones.count()
@@ -33,7 +33,7 @@ def calculate_drone_density_per_simulation(df):
 
 def plot_drone_density_per_simulation(data, labels=None):
     """
-    Gera um grafico de barras da densidade média de drones por simulação.
+    Gera um grafico de barras da densidade media de drones por simulação.
 
     Args:
         data_list (list): Lista de dicionrios retornados pela função calculate_drone_density.

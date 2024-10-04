@@ -14,7 +14,7 @@ def _calculate_interval(series):
 
 def calculate_duration_successful_trips_per_execution(df):
     """
-    Calcula a duraçao média das viagens com sucesso por execuçao.
+    Calcula a duraçao media das viagens com sucesso por execuçao.
 
     Args:
         df (DataFrame): DataFrame contendo os dados de drones.
@@ -54,7 +54,7 @@ def calculate_duration_successful_trips_per_execution(df):
 
 def plot_duration_successful_trips_per_execution(data_list, labels=None):
     """
-    Gera o grafico da duraçao média das viagens com sucesso por execuçao.
+    Gera o grafico da duraçao media das viagens com sucesso por execuçao.
 
     Args:
         data_list (list or dict): Dados calculados pela funçao calculate_duration_successful_trips.
@@ -80,7 +80,7 @@ def plot_duration_successful_trips_per_execution(data_list, labels=None):
     
     for data in data_list:
         
-        # Mapear execuçoes para médias e intervalos
+        # Mapear execuçoes para medias e intervalos
         exec_media_dict = dict(zip(data['execucoes'], data['media']))
         # Obter os valores na ordem de all_execucoes
         series_values = [exec_media_dict.get(exec_num, 0) for exec_num in all_execucoes]
@@ -100,7 +100,7 @@ def plot_duration_successful_trips_per_execution(data_list, labels=None):
         title='Duraçao das Viagens com Sucesso por Execuçao',
         show_interval=False
     )
-    # Atualizar os nomes das séries
+    # Atualizar os nomes das series
     for i, sim_name in enumerate(labels):
         fig.data[i].name = sim_name
 

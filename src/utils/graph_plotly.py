@@ -68,7 +68,7 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
     Retorna:
         fig (go.Figure): Figura plotly com o grafico de barras.
     """
-    # Verifica se values é uma lista (barras agrupadas) ou um array (barras simples)
+    # Verifica se values e uma lista (barras agrupadas) ou um array (barras simples)
     if isinstance(values, list):
         num_series = len(values)
         if labels is None:
@@ -78,7 +78,7 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
         for i in range(num_series):
             series_values = values[i]
             series_intervalos = intervalos[i] if isinstance(intervalos, list) else intervalos
-            series_name = f"Série {i+1}"
+            series_name = f"Serie {i+1}"
 
             error_y = dict(type='data', array=series_intervalos, visible=True) if show_interval and series_intervalos is not None else None
 

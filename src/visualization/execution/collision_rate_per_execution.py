@@ -81,7 +81,7 @@ def plot_collision_rate_per_execution(data_list, labels=None):
         title='Taxa de Colisao por Execuçao',
         show_interval=False
     )
-    # Atualizar os nomes das séries
+    # Atualizar os nomes das series
     for i, sim_name in enumerate(labels):
         fig.data[i].name = sim_name
 
