@@ -6,18 +6,23 @@
 -*plot_time_of_successful_trips_stable* = ok
 
 -*plot_number_of_detected_drones_at_collision_poisson* = 
-    No CSV de ML ele nao existe a esfera para para coletar info de raio de colisao
+    No CSV de ML ele nao existe a esfera para para coletar info de raio de colisao (csv coluna =  numero de drones detectados na colisao)
 
--*plot_drone_densit* = ok
+-*plot_drone_densit* = Arquivo sumamary, e ignora os 1000s para tras, qtd media de drones ativos na simulação no tempo estavel
 
 -*plot_average_density_successful_trips_collisions* = 
     No script script do matlab ele le a coluna 965, não achei a equivalente no CSV
 
--*plot_percentage_of_collisions_poisson_several_altitudes* = 
-    No script ele pega as colunas (1026:1027), nas no arquivo de rotulos eu nao achei informações sobre essas colunas
-
--*plot_achieved_altitudes_poisson_altitudes* = 
-    No script de matlab ele pega as colunas (1027:1086), nas no arquivo de rotulos eu nao achei informações sobre essas colunas
 
 -*plot_markov_collision_probability* = 
     Não entendi o script
+
+
+
+TODO:
+plot_average_density_successful_trips_collisions
+SCRIPT PARA O GRAFICO DE LINHAS (GRAFICO BONITO)
+
+TODO:
+plot_achieved_altitudes_poisson (FAZER SCRIPT PRO CSV)
+MEDIA DE ALTITUDE MAXIMA
