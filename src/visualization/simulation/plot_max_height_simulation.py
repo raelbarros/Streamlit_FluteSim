@@ -1,9 +1,9 @@
 import numpy as np
 from src.utils.graph_plotly import plot_bar
 
-# ARQUIVO: generalSimulationData
+# ARQUIVO: generalDroneData
 
-def calculate_collision_rate_per_simulation(df):
+def calculate_max_height_simulation(df):
     """
     Calcula a taxa de colisao com base no DataFrame fornecido.
 
@@ -13,17 +13,14 @@ def calculate_collision_rate_per_simulation(df):
     Returns:
         dict: Dicionrio com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisao.
     """
-    num_colisoes = df["numero total de drones colidentes"].values
-    num_drones = df["numero de drones lancados no tempo estavel"].values
+    height = df["altitude maxima atingida"].values
 
-    # Evitar divisao por zero
-    with np.errstate(divide='ignore', invalid='ignore'):
-        taxa_colisoes = np.where(num_drones != 0, (num_colisoes / num_drones) * 100, 0)
+    height = height[~np.isnan(height)]
 
-    media = np.mean(taxa_colisoes)
-    desvio_padrao = np.std(taxa_colisoes)
+    media = np.mean(height)
+    desvio_padrao = np.std(height)
 
-    n = len(taxa_colisoes)
+    n = len(height)
     intervalo = 1.96 * (desvio_padrao / np.sqrt(n)) if n > 0 else 0  # Evitar divisao por zero
 
     return {
@@ -33,12 +30,12 @@ def calculate_collision_rate_per_simulation(df):
     }
 
 
-def plot_collision_rate_per_simulation(data, labels=None):
+def plot_max_height_simulation(data, labels=None):
     """
-    Gera o grafico da taxa de colisao.
+    Gera o grafico de altitude maxima de voo.
 
     Args:
-        data (list or dict): Dados da taxa de colisao.
+        data (list or dict): Dados da simulação.
         labels (list, optional): Lista de labels para as barras.
 
     Returns:
@@ -62,7 +59,7 @@ def plot_collision_rate_per_simulation(data, labels=None):
         values=media,
         intervalos=intervalo,
         labels=labels,
-        title="Taxa de Colisão Geral",
-        x_label="Simulação",
-        y_label="Collision rate (%)",
+        x_label='Simulação',
+        y_label='Altitude (m)',
+        title='Altitude máxima atingida (m)',
     )

@@ -3,14 +3,16 @@ import pandas as pd
 
 # Importando as funçoes de cada grafico
 from src.visualization.execution.collision_rate_per_execution import calculate_collision_rate_per_execution, plot_collision_rate_per_execution
+from src.visualization.execution.drone_density_per_execution import calculate_drone_density_per_execution, plot_drone_density_per_execution
+from src.visualization.execution.duration_successful_trips_per_execution import calculate_duration_successful_trips_per_execution, plot_duration_successful_trips_per_execution
+from src.visualization.execution.time_successful_trips_stable_per_execution import calculate_time_successful_trips_stable_per_execution, plot_time_successful_trips_stable_per_execution
 from src.visualization.simulation.collision_rate_per_simulation import calculate_collision_rate_per_simulation, plot_collision_rate_per_simulation
 from src.visualization.simulation.collisions_per_situation import calculate_collisions_per_situation, plot_collisions_per_situation
-from src.visualization.execution.drone_density_per_execution import calculate_drone_density_per_execution, plot_drone_density_per_execution
 from src.visualization.simulation.drone_density_per_simulation import calculate_drone_density_per_simulation, plot_drone_density_per_simulation
-from src.visualization.execution.duration_successful_trips_per_execution import calculate_duration_successful_trips_per_execution, plot_duration_successful_trips_per_execution
 from src.visualization.simulation.duration_successful_trips_per_simulation import calculate_duration_successful_trips_per_simulation, plot_duration_successful_trips_per_simulation
 from src.visualization.simulation.flight_height_per_simulation import calculate_flight_height, plot_flight_height
-from src.visualization.execution.time_successful_trips_stable_per_execution import calculate_time_successful_trips_stable_per_execution, plot_time_successful_trips_stable_per_execution
+from src.visualization.simulation.plot_number_of_detected_drones_at_collision_poisson_simulation import calculate_dected_drones_simulation, plot_dected_drones_per_simulation
+from src.visualization.simulation.plot_max_height_simulation import calculate_max_height_simulation, plot_max_height_simulation
 
 
 # Mapeamento dos nomes de arquivos com as funçoes correspondentes
@@ -19,6 +21,10 @@ MAP_FUNCTIONS = {
         {
             'function_name': calculate_collisions_per_situation,
             'plot': plot_collisions_per_situation,
+        },
+        {
+            'function_name': calculate_dected_drones_simulation,
+            'plot': plot_dected_drones_per_simulation,
         },
     ],
     'generalSimulationData': [
@@ -49,16 +55,19 @@ MAP_FUNCTIONS = {
             'plot': plot_duration_successful_trips_per_simulation,
         },
         {
+            'function_name': calculate_time_successful_trips_stable_per_execution,
+            'plot': plot_time_successful_trips_stable_per_execution,
+        },
+        {
             'function_name': calculate_flight_height,
             'plot': plot_flight_height,
         },
         {
-            'function_name': calculate_time_successful_trips_stable_per_execution,
-            'plot': plot_time_successful_trips_stable_per_execution,
+            'function_name': calculate_max_height_simulation,
+            'plot': plot_max_height_simulation,
         },
     ],
 }
-
 
 
 def process_simulation_files(simulation):

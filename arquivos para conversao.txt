@@ -5,8 +5,7 @@
 
 -*plot_time_of_successful_trips_stable* = ok
 
--*plot_number_of_detected_drones_at_collision_poisson* = 
-    No CSV de ML ele nao existe a esfera para para coletar info de raio de colisao (csv coluna =  numero de drones detectados na colisao)
+-*plot_number_of_detected_drones_at_collision_poisson* = ok
 
 -*plot_drone_densit* = Arquivo sumamary, e ignora os 1000s para tras, qtd media de drones ativos na simulação no tempo estavel
 
@@ -23,6 +22,3 @@ TODO:
 plot_average_density_successful_trips_collisions
 SCRIPT PARA O GRAFICO DE LINHAS (GRAFICO BONITO)
 
-TODO:
-plot_achieved_altitudes_poisson (FAZER SCRIPT PRO CSV)
-MEDIA DE ALTITUDE MAXIMA

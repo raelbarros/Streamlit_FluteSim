@@ -1,11 +1,11 @@
 import numpy as np
 from src.utils.graph_plotly import plot_bar
 
-# ARQUIVO: generalSimulationData
+# ARQUIVO: droneCollisionData
 
-def calculate_collision_rate_per_simulation(df):
+def calculate_dected_drones_simulation(df):
     """
-    Calcula a taxa de colisao com base no DataFrame fornecido.
+    Calcula a quantidade de drones detectados no momento de colisão.
 
     Args:
         df (DataFrame): DataFrame contendo os dados da simulaçao.
@@ -13,17 +13,12 @@ def calculate_collision_rate_per_simulation(df):
     Returns:
         dict: Dicionrio com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisao.
     """
-    num_colisoes = df["numero total de drones colidentes"].values
-    num_drones = df["numero de drones lancados no tempo estavel"].values
+    num_colisoes = df["numero de drones detectados na colisao"].values
 
-    # Evitar divisao por zero
-    with np.errstate(divide='ignore', invalid='ignore'):
-        taxa_colisoes = np.where(num_drones != 0, (num_colisoes / num_drones) * 100, 0)
+    media = np.mean(num_colisoes)
+    desvio_padrao = np.std(num_colisoes)
 
-    media = np.mean(taxa_colisoes)
-    desvio_padrao = np.std(taxa_colisoes)
-
-    n = len(taxa_colisoes)
+    n = len(num_colisoes)
     intervalo = 1.96 * (desvio_padrao / np.sqrt(n)) if n > 0 else 0  # Evitar divisao por zero
 
     return {
@@ -33,12 +28,12 @@ def calculate_collision_rate_per_simulation(df):
     }
 
 
-def plot_collision_rate_per_simulation(data, labels=None):
+def plot_dected_drones_per_simulation(data, labels=None):
     """
-    Gera o grafico da taxa de colisao.
+    Gera o grafico da de quantidade de drones detectados no momento de colisão.
 
     Args:
-        data (list or dict): Dados da taxa de colisao.
+        data (list or dict): Dados.
         labels (list, optional): Lista de labels para as barras.
 
     Returns:
@@ -62,7 +57,7 @@ def plot_collision_rate_per_simulation(data, labels=None):
         values=media,
         intervalos=intervalo,
         labels=labels,
-        title="Taxa de Colisão Geral",
-        x_label="Simulação",
-        y_label="Collision rate (%)",
+        x_label='Simulação',
+        y_label='Quantidade',
+        title='Numero de drones detectados no momento da colisão',
     )

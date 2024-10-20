@@ -75,7 +75,7 @@ def plot_flight_height(data_list, labels=None):
         x='Tipo',
         y='Altitude',
         color='Simulacao',
-        title='Altura de Voo Mxima e Minima',
+        title='Altura de Voo Máxima e Minima',
         labels=labels
     )
 

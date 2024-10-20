@@ -53,7 +53,7 @@ def sidebar_menu():
         elif option == "Completa":
             # Configuraçoes para a analise completa
             qtd_exec = st.number_input(
-                "Quantidade de Simulaçoes", min_value=2, max_value=5, step=1
+                "Quantidade de Simulaçoes", min_value=2, max_value=6, step=1
             )
             list_simulation = []
             for i in range(int(qtd_exec)):

@@ -69,7 +69,7 @@ def plot_drone_density_per_execution(data_list, labels=None):
         labels=num_exec,
         x_label='Execuçao',
         y_label='Quantidade de Drones',
-        title='Número Média de Drones por Simulação',
+        title='Número Média de Drones por Execução',
         show_interval=False
     )
     # Atualizar os nomes das series
