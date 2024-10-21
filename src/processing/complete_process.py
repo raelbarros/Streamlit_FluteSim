@@ -11,7 +11,7 @@ from src.visualization.simulation.collisions_per_situation import calculate_coll
 from src.visualization.simulation.drone_density_per_simulation import calculate_drone_density_per_simulation, plot_drone_density_per_simulation
 from src.visualization.simulation.duration_successful_trips_per_simulation import calculate_duration_successful_trips_per_simulation, plot_duration_successful_trips_per_simulation
 from src.visualization.simulation.flight_height_per_simulation import calculate_flight_height, plot_flight_height
-from src.visualization.simulation.plot_number_of_detected_drones_at_collision_poisson_simulation import calculate_dected_drones_simulation, plot_dected_drones_per_simulation
+from src.visualization.simulation.plot_number_of_detected_drones_at_collision_poisson_simulation import calculate_detected_drones_simulation, plot_dected_drones_per_simulation
 from src.visualization.simulation.plot_max_height_simulation import calculate_max_height_simulation, plot_max_height_simulation
 
 
@@ -23,7 +23,7 @@ MAP_FUNCTIONS = {
             'plot': plot_collisions_per_situation,
         },
         {
-            'function_name': calculate_dected_drones_simulation,
+            'function_name': calculate_detected_drones_simulation,
             'plot': plot_dected_drones_per_simulation,
         },
     ],

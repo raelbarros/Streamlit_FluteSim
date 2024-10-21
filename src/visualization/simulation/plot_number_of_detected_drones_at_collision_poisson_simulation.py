@@ -3,23 +3,26 @@ from src.utils.graph_plotly import plot_bar
 
 # ARQUIVO: droneCollisionData
 
-def calculate_dected_drones_simulation(df):
+def calculate_detected_drones_simulation(df):
     """
-    Calcula a quantidade de drones detectados no momento de colisão.
+    Calcula a quantidade media de drones detectados no momento de colisão por execução e a media geral da simulação.
 
     Args:
-        df (DataFrame): DataFrame contendo os dados da simulaçao.
+        df (DataFrame): DataFrame contendo os dados da simulação.
 
     Returns:
-        dict: Dicionrio com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisao.
+        dict: Dicionário com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisão.
     """
-    num_colisoes = df["numero de drones detectados na colisao"].values
+    
+    # Agrupa por nnum de execução e calcula a media para cada execução
+    grouped_means = df.groupby('Numero da execucao')['numero de drones detectados na colisao'].mean()
 
-    media = np.mean(num_colisoes)
-    desvio_padrao = np.std(num_colisoes)
+    # Calcula a media geral das medias por execução
+    media = grouped_means.mean()
+    desvio_padrao = grouped_means.std()
 
-    n = len(num_colisoes)
-    intervalo = 1.96 * (desvio_padrao / np.sqrt(n)) if n > 0 else 0  # Evitar divisao por zero
+    n = len(grouped_means)
+    intervalo = 1.96 * (desvio_padrao / np.sqrt(n)) if n > 0 else 0  # Evitar divisão por zero
 
     return {
         "media": media,
