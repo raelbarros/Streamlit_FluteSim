@@ -9,108 +9,100 @@ import matplotlib.pyplot as plt
     É necessario passar o caminho da pasta para resgatar os arquivos numberOfCollisionsPerInterval, numberOfSuccessfulTripsPerInterval e Summary
 """
 
-# Função para ler e processar múltiplos arquivos summary
+# Função para ler e processar arquivos summary
 def process_summary_file(pasta_simulacoes, num_exec):
     lista_drones = []
+    all_indices = set()
 
-    # Iterar sobre todos os arquivos de summary
     for i in range(0, num_exec):
         arquivo_summary = os.path.join(pasta_simulacoes, f'Summary-{i}.txt')
-        
-        # Ler o arquivo summary
+
         summary_df = pd.read_csv(arquivo_summary, header=None, names=['Tempo', 'Drones'])
 
-        # Agrupar os dados por intervalos de 10 segundos (20ms * 500 = 10000ms = 10s)
-        summary_df['Intervalos_60s'] = summary_df.index // 500  # Agrupa cada 500 linhas
-        summary_agrupado = summary_df.groupby('Intervalos_60s').mean()
+        summary_df['Tempo'] = summary_df.index * 0.02
 
-        # Adicionar os dados processados à lista
+        summary_df['Intervalos_10s'] = (summary_df.index // 500) * 10 
+        summary_agrupado = summary_df.groupby('Intervalos_10s').mean()
+
+        all_indices.update(summary_agrupado.index.tolist())
         lista_drones.append(summary_agrupado['Drones'])
 
-    # Calcular a média geral da quantidade de drones por intervalo de 60 segundos
-    matriz_drones = np.array([drones.to_numpy() for drones in lista_drones])
-    media_drones = np.mean(matriz_drones, axis=0)
+    full_index = sorted(all_indices)
 
-    return summary_agrupado['Tempo'], media_drones
+    lista_drones_reindexed = [drones.reindex(full_index, fill_value=np.nan) for drones in lista_drones]
+
+    combined_df = pd.concat(lista_drones_reindexed, axis=1)
+    media_drones = combined_df.mean(axis=1)
+
+    return combined_df.index, media_drones
 
 
-def read_simulation_file(pasta_simulacoes, prefixo_arquivo, num_exec):
-    lista_simulacoes = []
+def read_and_process_file(pasta_simulacoes, prefixo_arquivo, num_exec):
+    lista_colisoes = []
     
-    # Ler arquivos de simulação
     for i in range(0, num_exec):
         arquivo = os.path.join(pasta_simulacoes, f"{prefixo_arquivo}-{i}.txt")
         
-        # Carregar o arquivo como DataFrame
-        df = pd.read_csv(arquivo, delimiter=',', header=None) 
+        if not os.path.exists(arquivo):
+            print(f"Arquivo não encontrado: {arquivo}")
+            continue
         
-        # Adicionar os dados
-        lista_simulacoes.append(df)
+        df = pd.read_csv(arquivo, delimiter=',', header=None)
+        df = df.dropna()
+        data = df.to_numpy().flatten()
+        lista_colisoes.append(data)
     
-    # Verifica shape do DF
-    shapes = [df.shape for df in lista_simulacoes]
-    print(f"Shape DataFrames: {shapes}")
+    max_length = max(len(data) for data in lista_colisoes)
+    lista_colisoes_padded = [np.pad(data, (0, max_length - len(data)), 'constant') for data in lista_colisoes]
+    matriz_colisoes = np.array(lista_colisoes_padded)
     
-    # Encontrar o número máximo de linhas e colunas
-    max_rows = max(df.shape[0] for df in lista_simulacoes)
-    max_cols = max(df.shape[1] for df in lista_simulacoes)
+    numero_de_colisoes_por_minuto = []
+    for execucao in matriz_colisoes:
+        colisoes_por_minuto = [np.sum(execucao[i:i+6]) for i in range(0, len(execucao), 6)]
+        numero_de_colisoes_por_minuto.append(colisoes_por_minuto)
     
-    # Padronizar os DataFrames
-    lista_simulacoes_padded = []
-    for df in lista_simulacoes:
-        # Preencher com NaN para linhas e colunas faltantes
-        df_padded = df.reindex(index=range(max_rows), columns=range(max_cols))
-        lista_simulacoes_padded.append(df_padded)
+    numero_de_colisoes_por_minuto = np.array(numero_de_colisoes_por_minuto)
+    media_colisoes_por_minuto = np.mean(numero_de_colisoes_por_minuto, axis=0)
     
-    # Converter em arrays numpy
-    matriz_simulacoes = np.array([df.to_numpy() for df in lista_simulacoes_padded])
+    return media_colisoes_por_minuto
+
+
+
+def plotar_grafico(media_viagens_por_minuto, media_colisoes_por_minuto, media_drones, tempo_drones):
+    tempo_minutos = np.arange(1, len(media_viagens_por_minuto) + 1) * 60  # Cada ponto representa 60 segundos
     
-    # Calcular a média, ignorando NaN
-    media_simulacoes = np.nanmean(matriz_simulacoes, axis=0)
+    plt.figure(figsize=(12, 8))
     
-    return media_simulacoes
-
-# Função para plotar grafico
-def plotar_grafico_serie_temporal(media_viagens_sucesso, media_colisoes, intervalos_tempo, media_drones_summary, tempo_summary):
-    media_colisoes = media_colisoes.flatten()
-    media_viagens_sucesso = media_viagens_sucesso.flatten()
-
-    plt.figure(figsize=(10, 6))
-
-    # Plotar a média de viagens bem-sucedidas por intervalo
-    plt.plot(intervalos_tempo, media_viagens_sucesso, label='Viagens com Sucesso', color='green', linestyle='-')
-
-    # Plotar a média de colisões por intervalo
-    plt.plot(intervalos_tempo, media_colisoes, label='Colisões', color='red', linestyle='-')
-
-    # Plotar a média de drones na simulação por intervalo
-    plt.plot(tempo_summary, media_drones_summary, label='Drones', color='orange', linestyle='-')
-
-    # Adicionar títulos e rótulos
+    # Plotar número de viagens bem-sucedidas
+    plt.plot(tempo_minutos, media_viagens_por_minuto, label='Viagens com Sucesso', color='green')
+    
+    # Plotar número de colisões
+    plt.plot(tempo_minutos, media_colisoes_por_minuto, label='Colisões', color='red')
+    
+    # Plotar número de drones
+    plt.plot(tempo_drones, media_drones, label='Número de Drones', color='orange', linestyle='-')
+    
     plt.title('')
-    plt.xlabel('Intervalos')
-    plt.ylabel('Média por Intervalo')
-
-    # Adicionar grade e legenda
-    plt.grid(True)
+    plt.xlabel('Tempo (s)')
+    plt.ylabel('Quantidade')
     plt.legend()
-
-    # Exibir o gráfico
+    plt.grid(True)
     plt.show()
 
 
-# FIXME: Trocar caminho do arquivo e verificar o valor de 4000 etc.. e num de exec
-pasta_simulacoes = r'D:\RESULTS\exec_04 (com esfera)\4_60_30x_model_10\2000-0' 
+#FIXME: alterar caminho e qtd de execuções
+# Definir parâmetros
+pasta_simulacoes = r'D:\RESULTS\exec_04 (com esfera)\12_60_30x_model_10\2000-0'
 num_exec = 29
 
-# Processa arquivos com janela temporal de 10s
-media_viagens_sucesso = read_simulation_file(pasta_simulacoes, 'numberOfSuccessfulTripsPerInterval', num_exec)
-media_colisoes = read_simulation_file(pasta_simulacoes, 'numberOfCollisionsPerInterval', num_exec)
+# Processar dados de viagens com sucesso
+media_viagens_por_minuto = read_and_process_file(pasta_simulacoes, 'numberOfSuccessfulTripsPerInterval', num_exec)
 
-# Processar os dados do summary
-tempo_summary, media_drones_summary = process_summary_file(pasta_simulacoes, num_exec)
+# Processar dados de colisões
+media_colisoes_por_minuto = read_and_process_file(pasta_simulacoes, 'numberOfCollisionsPerInterval', num_exec)
 
-# Intervalo de tempo de 10s
-intervalos_tempo = [i * 10 for i in range(1, media_viagens_sucesso.shape[1] + 1)]
+# Processar dados do summary
+tempo_drones, media_drones = process_summary_file(pasta_simulacoes, num_exec)
 
-plotar_grafico_serie_temporal(media_viagens_sucesso, media_colisoes, intervalos_tempo, media_drones_summary, tempo_summary)
+# Plotar os dados
+plotar_grafico(media_viagens_por_minuto, media_colisoes_por_minuto, media_drones, tempo_drones)
