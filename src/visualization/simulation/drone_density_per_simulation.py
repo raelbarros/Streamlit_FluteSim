@@ -60,7 +60,7 @@ def plot_drone_density_per_simulation(data, labels=None):
         labels=labels,
         x_label='Simulação',
         y_label='Quantidade Média de Drones',
-        title='Número Média de Drones por Simulação',
+        title='Número Médio de Drones por Simulação',
         show_interval=True
     )
 
