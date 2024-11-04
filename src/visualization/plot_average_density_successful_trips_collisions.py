@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
     É necessario passar o caminho da pasta para resgatar os arquivos numberOfCollisionsPerInterval, numberOfSuccessfulTripsPerInterval e Summary
 """
 
+
 # Função para ler e processar arquivos summary
 def process_summary_file(pasta_simulacoes, num_exec):
     lista_drones = []
@@ -90,9 +91,9 @@ def plotar_grafico(media_viagens_por_minuto, media_colisoes_por_minuto, media_dr
     plt.show()
 
 
-#FIXME: alterar caminho e qtd de execuções
+#FIXME: alterar caminho e qtd de execuções, ***COM A PASTA 8000-0***
 # Definir parametros
-pasta_simulacoes = r'D:\RESULTS\exec_05 (edit esfera)\96_60_30x_model_10\4000-0'
+pasta_simulacoes = r'D:\RESULTS\Exec_07\128_60_30x_model_10\8000-0'
 num_exec = 29
 
 # Processar dados de viagens com sucesso
