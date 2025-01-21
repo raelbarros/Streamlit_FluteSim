@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 
 #FIXME: alterar caminho e qtd de execuções ***SEM A PASTA 8000-0***
-pasta_simulacoes = r'D:\RESULTS\Exec_07\128_60_30x_model_10'
+pasta_simulacoes = r'D:\RESULTS\Exec_07\6_60_30x_model_10'
 
 
 _FILE = 'droneCollisionData.csv'
