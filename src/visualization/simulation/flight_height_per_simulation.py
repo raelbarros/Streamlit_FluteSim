@@ -54,12 +54,12 @@ def plot_flight_height(data_list, labels=None):
 
         df_max = pd.DataFrame({
             'Altitude': df_max,
-            'Tipo': 'Máxima',
+            'Type': 'Maximum',
             'Simulacao': sim_name
         })
         df_min = pd.DataFrame({
             'Altitude': df_min,
-            'Tipo': 'Minima',
+            'Type': 'Minimum',
             'Simulacao': sim_name
         })
 
@@ -69,10 +69,10 @@ def plot_flight_height(data_list, labels=None):
     df_all = pd.concat(data_frames, ignore_index=True)
 
     # Criacaçao do grafico
-    labels={'Tipo': 'Type', 'Altitude': 'Altitude (m)'}
+    labels={'Type': "Arrival rate (drones/min)", 'Altitude': 'Altitude (m)'}
     fig = plot_boxsplot(
         df_all,
-        x='Tipo',
+        x='Type',
         y='Altitude',
         color='Simulacao',
         title='Maximum and Minimum Flight Height',

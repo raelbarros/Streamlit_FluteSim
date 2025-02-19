@@ -208,9 +208,9 @@ def aggregate_results(all_results):
                             )
                             st.plotly_chart(fig, theme=None)
                             st.divider()
-
-                        st.plotly_chart(fig)
-                        st.divider()
+                        else: 
+                            st.plotly_chart(fig)
+                            st.divider()
                     else:
                         st.warning(f"A função {func_name} não retornou um grafico.")
                 else:
