@@ -75,25 +75,25 @@ def plotar_grafico(media_viagens_por_minuto, media_colisoes_por_minuto, media_dr
     plt.figure(figsize=(12, 8))
     
     # Plotar numero de viagens bem-sucedidas
-    plt.plot(tempo_minutos, media_viagens_por_minuto, label='Viagens com Sucesso', color='green')
+    plt.plot(tempo_minutos, media_viagens_por_minuto, label='Successful trip', color='green')
     
     # Plotar numero de colisões
-    plt.plot(tempo_minutos, media_colisoes_por_minuto, label='Colisões', color='red')
+    plt.plot(tempo_minutos, media_colisoes_por_minuto, label='Collisions', color='red')
     
     # Plotar numero de drones
     plt.plot(tempo_drones, media_drones, label='Drones', color='orange', linestyle='-')
     
     plt.title('')
-    plt.xlabel('Tempo (s)', fontsize=20)
-    plt.ylabel('Numero de Drones', fontsize=20)
-    plt.legend(fontsize=15)
+    plt.xlabel('Time (s)', fontsize=20)
+    plt.ylabel('Number of drones', fontsize=20)
+    plt.legend(fontsize=15, loc='center')
     plt.grid(False)
     plt.show()
 
 
 #FIXME: alterar caminho e qtd de execuções, ***COM A PASTA 8000-0 (ou equivalente)***
 # Definir parametros
-pasta_simulacoes = r'D:\RESULTS\Exec_07\192_60_30x_model_10\10000-0'
+pasta_simulacoes = r'D:\RESULTS\Exec_07\12_60_30x_model_10\8000-0'
 num_exec = 29
 
 # Processar dados de viagens com sucesso
