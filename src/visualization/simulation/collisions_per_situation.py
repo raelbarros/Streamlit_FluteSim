@@ -128,9 +128,9 @@ def plot_collisions_per_situation(data_list, labels=None):
         values=values_list,
         intervalos=intervalos_list,
         labels=categorias,
-        x_label="Situaçao",
-        y_label="Numero de Colisões",
-        title="Numero Médio de Colisoes por Situação"
+        x_label="",
+        y_label="Number of collisions",
+        title="Numero of collisions per situation"
     )
 
     # Atualizar os nomes das simulaçao

@@ -68,9 +68,9 @@ def plot_duration_successful_trips_per_simulation(data, labels=None):
         values=media,
         intervalos=intervalo,
         labels=labels,
-        x_label='Simulação',
-        y_label='Tempo (s)',
-        title='Duração Média das Viagens com Sucesso por Simulação',
+        x_label='Arrival rate (drones/min)',
+        y_label='Time (s)',
+        title='Average duration of successful trips by simulation',
         show_interval=True
     )
 

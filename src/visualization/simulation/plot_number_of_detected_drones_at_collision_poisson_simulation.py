@@ -60,7 +60,7 @@ def plot_dected_drones_per_simulation(data, labels=None):
         values=media,
         intervalos=intervalo,
         labels=labels,
-        x_label='Simulação',
-        y_label='Quantidade',
-        title='Numero de drones detectados no momento da colisão',
+        x_label="Arrival rate (drones/min)",
+        y_label='',
+        title='Number of drones detected at the time of the collision',
     )

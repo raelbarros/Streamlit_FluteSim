@@ -102,7 +102,9 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
         ))
 
     ymax = (np.array(values).max() + np.array(intervalos).max()) * 1.2
-
+    
+    fig.update_xaxes(type="category") # Ajusta os valores do eixo X
+    
     fig.update_layout(
         title=title,
         xaxis_title=x_label,

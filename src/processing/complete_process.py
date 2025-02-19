@@ -133,10 +133,19 @@ def aggregate_results(all_results):
     if not all_results:
         st.warning("Nenhum resultado foi gerado.")
         return
-
+    
     results_df = pd.DataFrame(all_results)
 
+    # Add checkbox para alterar layout quando necessario
+    with st.chat_message("User"):
+        st.write(":pushpin: Atenção!")
+        st.write("Selecione a opção abaixo para configurar os graficos no layout de paper")
+        checked_paper = st.checkbox("Paper Layout :scroll:", value=False)
 
+    # add DF para ser baixado se necesario.
+    with st.expander("DataFrame com os valores processados"):
+        st.dataframe(results_df)
+    
     # Cria abas por nome do arquivo
     files_name = results_df['file_name'].unique()
     tabs = st.tabs([f"Arquivo: {file}" for file in files_name])
@@ -163,10 +172,43 @@ def aggregate_results(all_results):
 
                     # Gerar e exibir o grafico
                     plot_func = globals()[plot_func_name]
-                    
                     fig = plot_func(data, labels=labels)
+
                     # Gerar e exibir o grafico
                     if fig:
+                        # If alteração do layout
+                        if checked_paper:
+                            # att legenda e tamanho do texto para exportar graficos para o artigo 
+                            fig.update_layout(
+                                plot_bgcolor='white',
+                                title='',
+                                legend=dict(
+                                    title="",
+                                    font=dict(
+                                        size=30  # Define o tamanho do texto da legenda
+                                    ),
+                                    x=0.02,  # Posiçao horizontal dentro do gráfico (0 é a esquerda, 1 é a direita)
+                                    y=0.95,  # Posiçao vertical dentro do gráfico (0 é na base, 1 é no topo)
+                                    xanchor='left',  # Alinha a legenda em relaçao ao ponto definido por x
+                                    yanchor='top',   # Alinha a legenda em relaçao ao ponto definido por y
+                                    bgcolor='rgba(255, 255, 255, 0.7)',  # Fundo da legenda com transparência
+                                    bordercolor='black',  # Cor da borda da legenda
+                                    borderwidth=1         # Largura da borda da legenda
+                                ),
+
+                                yaxis=dict(
+                                    title_font=dict(size=30),
+                                    tickfont=dict(size=30)
+                                ),
+                                
+                                xaxis=dict(
+                                    title_font=dict(size=30),
+                                    tickfont=dict(size=30)
+                                )
+                            )
+                            st.plotly_chart(fig, theme=None)
+                            st.divider()
+
                         st.plotly_chart(fig)
                         st.divider()
                     else:

@@ -69,13 +69,13 @@ def plot_flight_height(data_list, labels=None):
     df_all = pd.concat(data_frames, ignore_index=True)
 
     # Criacaçao do grafico
-    labels={'Tipo': 'Tipo de Altitude', 'Altitude': 'Altitude (m)'}
+    labels={'Tipo': 'Type', 'Altitude': 'Altitude (m)'}
     fig = plot_boxsplot(
         df_all,
         x='Tipo',
         y='Altitude',
         color='Simulacao',
-        title='Altura de Voo Máxima e Minima',
+        title='Maximum and Minimum Flight Height',
         labels=labels
     )
 

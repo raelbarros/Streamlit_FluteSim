@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 
 #FIXME: alterar caminho e qtd de execuções ***SEM A PASTA 8000-0***
-pasta_simulacoes = r'D:\RESULTS\Exec_07\6_60_30x_model_10'
+pasta_simulacoes = r'D:\RESULTS\Exec_07\192_60_30x_model_10'
 
 
 _FILE = 'droneCollisionData.csv'
@@ -25,9 +25,9 @@ plt.figure(figsize=(8, 6))
 
 plt.scatter(x, y)
 
-plt.title('Pontos de Colisões do Drone')
-plt.xlabel('Coordenada X')
-plt.ylabel('Coordenada Z')
+plt.title('')
+plt.xlabel('Eixo X', fontsize=15)
+plt.ylabel('Eixo Z', fontsize=15)
 plt.legend()
 
 #plt.grid(True)
