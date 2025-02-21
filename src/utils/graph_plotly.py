@@ -57,8 +57,8 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
     Cria um grafico de barras (simples ou agrupado) com intervalos de confiança.
 
     Args:
-        values (np.ndarray or list of np.ndarray): Valores das barras. Pode ser um array para barras simples ou uma lista de arrays para barras agrupadas.
-        intervalos (np.ndarray or list of np.ndarray): Intervalos de confiança para cada barra ou grupo de barras.
+        values (np.ndarray ou list de np.ndarray): Valores das barras. Pode ser um array para barras simples ou uma lista de arrays para barras agrupadas.
+        intervalos (np.ndarray ou list de np.ndarray): Intervalos de confiança para cada barra ou grupo de barras.
         labels (np.ndarray): Rótulos das barras (para o eixo X).
         x_label (str): Legenda do eixo X.
         y_label (str): Legenda do eixo Y.
@@ -68,7 +68,7 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
     Retorna:
         fig (go.Figure): Figura plotly com o grafico de barras.
     """
-    # Verifica se values e uma lista (barras agrupadas) ou um array (barras simples)
+    # Caso seja um gráfico de barras agrupado
     if isinstance(values, list):
         num_series = len(values)
         if labels is None:
@@ -90,9 +90,9 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
                 text=series_values if show_num else None,
                 textposition='outside' if show_num else None
             ))
-        fig.update_layout(barmode='group')
+
+    # Caso seja um gráfico de barras simples
     else:
-        # grafico de barras simples
         fig = go.Figure(go.Bar(
             x=labels,
             y=values,
@@ -110,6 +110,7 @@ def plot_bar(values, intervalos=None, labels=None, x_label="Eixo X", y_label="Ei
         xaxis_title=x_label,
         yaxis_title=y_label,
         yaxis=dict(range=[0, ymax]),
+        barmode='group'
     )
 
     return fig

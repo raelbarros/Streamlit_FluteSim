@@ -139,8 +139,8 @@ def aggregate_results(all_results):
     # Add checkbox para alterar layout quando necessario
     with st.chat_message("User"):
         st.write(":pushpin: Atenção!")
-        st.write("Selecione a opção abaixo para configurar os graficos no layout de paper")
-        checked_paper = st.checkbox("Paper Layout :scroll:", value=False)
+        st.write("Selecione a opção abaixo para configurar os graficos no layout de artigo")
+        checked_paper = st.checkbox("Layout de Artigo :scroll:", value=False)
 
     # add DF para ser baixado se necesario.
     with st.expander("DataFrame com os valores processados"):
