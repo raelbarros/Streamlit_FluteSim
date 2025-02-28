@@ -14,7 +14,7 @@ def calculate_collision_rate_per_simulation(df):
         dict: Dicionrio com 'media', 'desvio_padrao' e 'intervalo' da taxa de colisao.
     """
     num_colisoes = df["numero total de drones colidentes"].values
-    num_drones = df["numero de drones lancados no tempo estavel"].values
+    num_drones = df["numero total de drones lancados"].values
 
     # Evitar divisao por zero
     with np.errstate(divide='ignore', invalid='ignore'):
