@@ -198,12 +198,14 @@ def aggregate_results(all_results):
 
                                 yaxis=dict(
                                     title_font=dict(size=30),
-                                    tickfont=dict(size=30)
+                                    tickfont=dict(size=30),
+                                    automargin=True
                                 ),
                                 
                                 xaxis=dict(
                                     title_font=dict(size=30),
-                                    tickfont=dict(size=30)
+                                    tickfont=dict(size=30),
+                                    automargin=True
                                 )
                             )
                             st.plotly_chart(fig, theme=None)

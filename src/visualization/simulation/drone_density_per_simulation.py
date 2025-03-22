@@ -59,7 +59,7 @@ def plot_drone_density_per_simulation(data, labels=None):
         intervalos=intervalo,
         labels=labels,
         x_label='Arrival rate (drones/min)',
-        y_label='Average number of drones',
+        y_label='Number of drones',
         title='Average Number of Drones',
         show_interval=True
     )
