@@ -181,7 +181,6 @@ def aggregate_results(all_results):
                             # att legenda e tamanho do texto para exportar graficos para o artigo 
                             fig.update_layout(
                                 plot_bgcolor='white',
-                                title='',
                                 legend=dict(
                                     title="",
                                     font=dict(
@@ -195,18 +194,24 @@ def aggregate_results(all_results):
                                     bordercolor='black',  # Cor da borda da legenda
                                     borderwidth=1         # Largura da borda da legenda
                                 ),
-
                                 yaxis=dict(
                                     title_font=dict(size=30),
                                     tickfont=dict(size=30),
                                     automargin=True
                                 ),
-                                
                                 xaxis=dict(
                                     title_font=dict(size=30),
                                     tickfont=dict(size=30),
                                     automargin=True
-                                )
+                                ),
+                                # Texto Dissertacao
+                                title='', 
+                                # yaxis_title='',
+                                # title=dict(
+                                #     x=0.5,                
+                                #     xanchor='center',     
+                                #     font=dict(size=40)    
+                                # )
                             )
                             st.plotly_chart(fig, theme=None)
                             st.divider()

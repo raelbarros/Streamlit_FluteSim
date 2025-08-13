@@ -6,7 +6,7 @@ from src.processing.complete_process import complete_process
 # Constantes e Variaveis Globais
 _VALID_FILES = ['droneCollisionData.csv', 'generalDroneData.csv', 'generalSimulationData.csv']
 _ERROR_INVALID_FILES = "Arquivos invalidos, verifique se os nomes dos arquivos estão corretos"
-_INFO_FILL_SIMULATION = "Preencha todas as informaçoes das Simulaçoes"
+_INFO_FILL_SIMULATION = "Preencha todas as informações das Simulaçoes"
 _SUCCESS_MESSAGE = "Graficos gerados com sucesso!"
 
 
@@ -53,7 +53,7 @@ def sidebar_menu():
         elif option == "Completa":
             # Configuraçoes para a analise completa
             qtd_exec = st.number_input(
-                "Quantidade de Simulaçoes", min_value=2, max_value=10, step=1
+                "Quantidade de Simulações", min_value=2, max_value=10, step=1
             )
             list_simulation = []
             for i in range(int(qtd_exec)):

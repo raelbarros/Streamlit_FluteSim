@@ -62,7 +62,7 @@ def plot_collision_rate_per_simulation(data, labels=None):
         values=media,
         intervalos=intervalo,
         labels=labels,
-        title="Collision rate per arrival rates",
-        x_label="Arrival rate (drones/min)",
-        y_label="Collision rate (%)",
+        title="Taxa de Colisão (%)",
+        x_label="Taxa de Lançamento (drones/min)",
+        y_label="Taxa de Colisão (%)",
     )

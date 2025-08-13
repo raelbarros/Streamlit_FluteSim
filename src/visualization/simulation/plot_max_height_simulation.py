@@ -59,7 +59,7 @@ def plot_max_height_simulation(data, labels=None):
         values=media,
         intervalos=intervalo,
         labels=labels,
-        x_label="Arrival rate (drones/min)",
-        y_label='Height (m)',
-        title='Maximum altitude (m)',
+        x_label="Taxa de Lançamento (drones/min)",
+        y_label='Altitude máxima atingida (m)',
+        title='',
     )
