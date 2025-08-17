@@ -103,11 +103,11 @@ def calculate_collisions_per_situation(df):
 
 def plot_collisions_per_situation(data_list, labels=None):
     """
-    Gera o grafico do numero medio de colisoes por situaçao.
+    Gera o gráfico do percentual médio de colisões por situação.
 
     Args:
-        data_list (list): Lista de dicionarios retornados por calculate_collisions_per_situation.
-        simulation_names (list, optional): Lista de nomes das simulaçoes correspondentes aos dados em data_list.
+        data_list (list): Lista de dicionários retornados por calculate_collisions_per_situation.
+        labels (list, optional): Lista de nomes das simulações correspondentes aos dados em data_list.
 
     Returns:
         Figure: Objeto de figura Plotly.
@@ -116,24 +116,39 @@ def plot_collisions_per_situation(data_list, labels=None):
         data_list = [data_list]
     
     if labels is None:
-        labels = [f"Simulaçao {i+1}" for i in range(len(data_list))]
+        labels = [f"Simulação {i+1}" for i in range(len(data_list))]
 
     categorias = data_list[0]['categorias'] 
 
-    values_list = [data['media_categorias'] for data in data_list]
-    intervalos_list = [data['intervalo_confianca_categorias'] for data in data_list]
+    values_list = []
+    intervalos_list = []
 
-    # Chama a funçao plot_bar modificada para suportar multiplas series
+    for data in data_list:
+        medias = data['media_categorias']
+        intervalos = data['intervalo_confianca_categorias']
+
+        total = np.sum(medias)
+        if total > 0:
+            medias_pct = (medias / total) * 100
+            intervalos_pct = (intervalos / total) * 100
+        else:
+            medias_pct = medias
+            intervalos_pct = intervalos
+
+        values_list.append(medias_pct)
+        intervalos_list.append(intervalos_pct)
+
+    # Agora o gráfico será em porcentagem
     fig = plot_bar(
         values=values_list,
         intervalos=intervalos_list,
         labels=categorias,
         x_label="",
-        y_label="Number of collisions",
-        title="Numero of collisions per situation"
+        y_label="Taxa de colisão (%)",
+        title="Taxa de colisão por situation"
     )
 
-    # Atualizar os nomes das simulaçao
+    # Atualizar os nomes das simulações
     for i, sim_name in enumerate(labels):
         fig.data[i].name = sim_name
 
