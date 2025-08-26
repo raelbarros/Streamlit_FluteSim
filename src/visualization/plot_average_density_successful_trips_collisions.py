@@ -93,7 +93,7 @@ def plotar_grafico(media_viagens_por_minuto, media_colisoes_por_minuto, media_dr
 
 #FIXME: alterar caminho e qtd de execuções, ***COM A PASTA 8000-0 (ou equivalente)***
 # Definir parametros
-pasta_simulacoes = r'D:\RESULTS\exec_07\192_60_30x_model_10\10000-0'
+pasta_simulacoes = r'D:\RESULTS\Pos qualificacao\exec_01\12_multi_model-v2\10000-0'
 num_exec = 29
 
 # Processar dados de viagens com sucesso
