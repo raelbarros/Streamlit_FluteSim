@@ -144,7 +144,7 @@ def plot_collisions_per_situation(data_list, labels=None):
         intervalos=intervalos_list,
         labels=categorias,
         x_label="",
-        y_label="Taxa de colisão (%)",
+        y_label="Collision rate (%)",
         title="Taxa de colisão por situation"
     )
 

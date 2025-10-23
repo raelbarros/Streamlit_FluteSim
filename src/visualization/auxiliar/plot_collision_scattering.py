@@ -9,11 +9,11 @@ import matplotlib.pyplot as plt
 
 
 #FIXME: alterar caminho e qtd de execuções ***SEM A PASTA 8000-0***
-pasta_simulacoes = r'D:\RESULTS\Exec_07\192_60_30x_model_10'
+pasta_simulacoes = '/Volumes/SSD/Projects/Mestrado/RESULTS/Artigo Final/12_ppo_swish_clip'
 
 
 _FILE = 'droneCollisionData.csv'
-final_path = f"{pasta_simulacoes}\{_FILE}"
+final_path = f"{pasta_simulacoes}/{_FILE}"
 
 df = pd.read_csv(final_path)
 df.columns = df.columns.str.strip()
@@ -26,8 +26,8 @@ plt.figure(figsize=(8, 6))
 plt.scatter(x, y)
 
 plt.title('')
-plt.xlabel('Eixo X', fontsize=15)
-plt.ylabel('Eixo Z', fontsize=15)
+plt.xlabel('Axis X', fontsize=15)
+plt.ylabel('Axis Z', fontsize=15)
 plt.legend()
 
 #plt.grid(True)
