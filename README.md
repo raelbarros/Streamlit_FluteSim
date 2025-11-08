@@ -1,4 +1,4 @@
-
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/raelbarros/Streamlit_FluteSim)
 # Streamlit - Dash de resultados do FluteSim
 
 
