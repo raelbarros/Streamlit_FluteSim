@@ -26,8 +26,8 @@ plt.figure(figsize=(8, 6))
 plt.scatter(x, y)
 
 plt.title('')
-plt.xlabel('Axis X', fontsize=15)
-plt.ylabel('Axis Z', fontsize=15)
+plt.xlabel('Eixo X', fontsize=15)
+plt.ylabel('Eixo Z', fontsize=15)
 plt.legend()
 
 #plt.grid(True)

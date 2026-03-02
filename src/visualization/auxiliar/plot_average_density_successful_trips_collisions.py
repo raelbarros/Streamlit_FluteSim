@@ -75,18 +75,22 @@ def plotar_grafico(media_viagens_por_minuto, media_colisoes_por_minuto, media_dr
     plt.figure(figsize=(12, 8))
     
     # Plotar numero de viagens bem-sucedidas
-    plt.plot(tempo_minutos, media_viagens_por_minuto, label='Success trip', color='green')
+    plt.plot(tempo_minutos, media_viagens_por_minuto, label='Successful trip', color='green')
     
     # Plotar numero de colisões
     plt.plot(tempo_minutos, media_colisoes_por_minuto, label='Collisions', color='red')
     
     # Plotar numero de drones
     plt.plot(tempo_drones, media_drones, label='Drones', color='orange', linestyle='-')
-    
+    from matplotlib.ticker import MaxNLocator
+
     plt.title('')
     plt.xlabel('Time (s)', fontsize=20)
-    plt.ylabel('Numbers of drones', fontsize=20)
-    plt.legend(fontsize=15, loc='center')
+    plt.ylabel('Number of drones', fontsize=20)
+    plt.legend(fontsize=15, bbox_to_anchor=(0.1, 0.5))
+    plt.xticks(fontsize=20)
+    plt.yticks(fontsize=20)
+    plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
     plt.grid(False)
     plt.show()
 

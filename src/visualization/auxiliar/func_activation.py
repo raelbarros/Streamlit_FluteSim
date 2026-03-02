@@ -1,40 +1,49 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Intervalo do eixo x
-x = np.linspace(-3, 3, 400)
+# Aumentar tamanho global da fonte
+plt.rcParams.update({
+    'font.size': 15,       # tamanho do texto geral
+    'axes.titlesize': 15,  # tamanho do título
+    'axes.labelsize': 15,  # tamanho dos rótulos dos eixos
+    'legend.fontsize': 15, # tamanho da legenda
+    'xtick.labelsize': 15,
+    'ytick.labelsize': 15
+})
 
-# Funções de ativação
+# Dados de entrada
+x = np.linspace(-5, 5, 200)
+
+# ---- Figura 1: ReLU vs Swish ----
 relu = np.maximum(0, x)
 swish = x / (1 + np.exp(-x))
+
+plt.figure(figsize=(6, 4))
+plt.plot(x, relu, label="ReLU", linewidth=2)
+plt.plot(x, swish, label="Swish", linewidth=2, color='orange')
+plt.legend()
+# plt.grid(True, linestyle='--', alpha=0.6)
+# plt.title("Funções de Ativação: ReLU e Swish")
+plt.xlabel('x', fontsize=15)
+plt.ylabel('y', fontsize=15)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
+plt.tight_layout()
+plt.show()
+
+# ---- Figura 2: tanh vs clip ----
 tanh = np.tanh(x)
-linear_clip = np.clip(x, -1, 1)
+clip = np.clip(x / 2, -1, 1)
 
-# Criação da figura com 2 subplots lado a lado
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-
-# ======== Gráfico 1: ReLU e Swish ========
-axes[0].plot(x, relu, label='ReLU', linewidth=2)
-axes[0].plot(x, swish, label='Swish', linewidth=2)
-axes[0].axhline(0, color='black', linewidth=1)
-axes[0].axvline(0, color='black', linewidth=1)
-# axes[0].grid(True, linestyle='--', alpha=0.6)
-axes[0].set_title('ReLU e Swish', fontsize=13)
-# axes[0].set_xlabel('x', fontsize=11)
-# axes[0].set_ylabel('f(x)', fontsize=11)
-axes[0].legend()
-
-# ======== Gráfico 2: Tanh e Linear Clipped ========
-axes[1].plot(x, tanh, label='Tanh', linewidth=2)
-axes[1].plot(x, linear_clip, label='Linear ([-1,1])', linewidth=2)
-axes[1].axhline(0, color='black', linewidth=1)
-axes[1].axvline(0, color='black', linewidth=1)
-# axes[1].grid(True, linestyle='--', alpha=0.6)
-axes[1].set_title('Tanh e Linear', fontsize=13)
-# axes[1].set_xlabel('x', fontsize=11)
-# axes[1].set_ylabel('f(x)', fontsize=11)
-axes[1].legend()
-
-# Ajuste de layout
+plt.figure(figsize=(6, 4))
+plt.plot(x, tanh, label="Tanh", linewidth=2)
+plt.plot(x, clip, label="Clip [-1, 1]", linewidth=2, color='orange')
+plt.legend()
+# plt.grid(True, linestyle='--', alpha=0.6)
+# plt.title("Funções de Ativação: tanh e clip")
+plt.xlabel("x", fontsize=15)
+plt.ylabel("y", fontsize=15)
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
 plt.tight_layout()
 plt.show()

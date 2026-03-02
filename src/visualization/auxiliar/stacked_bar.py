@@ -43,7 +43,7 @@ def load_collision_summary(drone_csv: str, simulation_csv: str):
     df_drone = pd.read_csv(drone_csv)
     percent_drone = df_drone["modelo"].value_counts(normalize=True) * 100
     percent_drone = _rename_models(percent_drone)
-
+    
     df_simulation = pd.read_csv(simulation_csv)
     df_simulation.columns = [col.strip() for col in df_simulation.columns]
 
@@ -57,6 +57,8 @@ def load_collision_summary(drone_csv: str, simulation_csv: str):
     n = len(taxa_colisao)
     intervalo = 1.96 * (desvio_padrao / np.sqrt(n)) if n > 0 else 0
 
+    print(percent_drone)
+    print(media)
     return media, intervalo, percent_drone
 
 
@@ -102,16 +104,18 @@ def build_stacked_bar(configs: Iterable[DatasetConfig] = None):
                 x=categorias,
                 y=y_values,
                 name=modelo,
-                # text=textos,
-                # textposition="inside",
-                # customdata=customdata,
-                # hovertemplate=(
-                #     "Modelo: %{customdata[1]}"
-                #     "<br>Arrival rate: %{x}"
-                #     "<br>Percentual: %{customdata[0]:.1f}%"
-                #     "<br>Contribuição: %{y:.2f}%"
-                #     "<extra></extra>"
-                # ),
+                text=textos,
+                textposition="inside",
+                insidetextanchor="middle",
+                textfont=dict(size=30),
+                customdata=customdata,
+                hovertemplate=(
+                    "Modelo: %{customdata[1]}"
+                    "<br>Arrival rate: %{x}"
+                    "<br>Percentual: %{customdata[0]:.1f}%"
+                    "<br>Contribuição: %{y:.2f}%"
+                    "<extra></extra>"
+                ),
             )
         )
 
@@ -142,7 +146,7 @@ def build_stacked_bar(configs: Iterable[DatasetConfig] = None):
                 automargin=True
             ),
         xaxis=dict(
-                title="Arrival rate (drones/min)",
+                title="12",
                 title_font=dict(size=30),
                 tickfont=dict(size=30),
                 automargin=True
@@ -161,12 +165,12 @@ def build_stacked_bar(configs: Iterable[DatasetConfig] = None):
 if __name__ == "__main__":
     example_configs = [
         DatasetConfig(
-            x_value="ML",
+            x_value="RL",
             drone_csv=DEFAULT_DRONE_CSV,
             simulation_csv=DEFAULT_SIMULATION_CSV,
         ),
         DatasetConfig(
-            x_value="ML + Geo",
+            x_value="RL + Geo",
             drone_csv=f"{DEFAULT_ROOT}/12_multi_model_ml_geo/droneCollisionData.csv",
             simulation_csv=f"{DEFAULT_ROOT}/12_multi_model_ml_geo/generalSimulationData.csv",
         ),

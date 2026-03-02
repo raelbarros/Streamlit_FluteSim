@@ -6,32 +6,45 @@ import os
 # =========================
 # CAMINHO DOS DADOS
 # -------------------------
-path = "src/visualization/auxiliar/data/rewards/*.csv"
+path = "src/visualization/auxiliar/data/policy_loss/*.csv"
+title = "Perda da Política"
 
 csv_files = glob.glob(path)
 
 dfs = []
 
+# colors = [
+#     # Grupo 1 (tons frios)
+#     "#1f77b4",  # azul forte
+#     "#2ca02c",  # verde médio
+#     "#17becf",  # ciano
+#     "#9edae5",  # azul claro
+
+#     # Grupo 2 (tons quentes)
+#     "#d62728",  # vermelho
+#     "#ff7f0e",  # laranja
+#     "#ffbb78",  # laranja claro
+#     "#e377c2"   # rosa
+# ]
+
 colors = [
-    # Grupo 1 (tons frios)
-    "#1f77b4",  # azul forte
-    "#2ca02c",  # verde médio
-    "#17becf",  # ciano
-    "#9edae5",  # azul claro
-
-    # Grupo 2 (tons quentes)
-    "#d62728",  # vermelho
+    "#1f77b4",  # azul
     "#ff7f0e",  # laranja
-    "#ffbb78",  # laranja claro
-    "#e377c2"   # rosa
+    "#2ca02c",  # verde
+    "#d62728",  # vermelho
+    "#9467bd",  # roxo
+    "#8c564b",  # marrom
+    "#e377c2",  # rosa
+    "#7f7f7f",  # cinza
+    "#bcbd22",  # oliva / amarelo esverdeado
+    "#17becf"   # ciano
 ]
-
 
 
 for file in csv_files:
     df = pd.read_csv(file)
     df["source"] = os.path.basename(file).replace(".csv", "")
-    dfs.append(df)
+    dfs.append(df[200:])
 
 df_all = pd.concat(dfs, ignore_index=True)
 ordered_sources = sorted(df_all["source"].unique())
@@ -45,15 +58,15 @@ fig = px.line(
     color_discrete_sequence=colors,
 )
 fig.update_layout(
-    xaxis_title="Episodes",
-    yaxis_title="Rewards",
+    xaxis_title="Episódios",
+    yaxis_title=title,
     template="plotly_white",
     legend=dict(
         title="",
         font=dict(
             size=30  # Define o tamanho do texto da legenda
         ),
-        x=0.02,  # Posiçao horizontal dentro do gráfico (0 é a esquerda, 1 é a direita)
+        x=0.05,  # Posiçao horizontal dentro do gráfico (0 é a esquerda, 1 é a direita)
         y=0.95,  # Posiçao vertical dentro do gráfico (0 é na base, 1 é no topo)
         xanchor='left',  # Alinha a legenda em relaçao ao ponto definido por x
         yanchor='top',   # Alinha a legenda em relaçao ao ponto definido por y

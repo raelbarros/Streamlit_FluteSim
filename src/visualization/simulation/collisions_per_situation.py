@@ -144,8 +144,22 @@ def plot_collisions_per_situation(data_list, labels=None):
         intervalos=intervalos_list,
         labels=categorias,
         x_label="",
-        y_label="Collision rate (%)",
-        title="Taxa de colisão por situation"
+        y_label="Collision frequency (%)",
+        title="Taxa de colisão por situation",
+    )
+    fig.update_layout(
+        colorway=[
+            "#1f77b4",  # azul
+            "#ff7f0e",  # laranja
+            # "#2ca02c",  # verde
+            # "#d62728",  # vermelho
+            # "#9467bd",  # roxo
+            # "#8c564b",  # marrom
+            "#e377c2",  # rosa
+            "#7f7f7f",  # cinza
+            # "#bcbd22",  # oliva
+            # "#17becf",  # ciano
+        ]
     )
 
     # Atualizar os nomes das simulações
