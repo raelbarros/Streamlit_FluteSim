@@ -104,7 +104,7 @@ for nome, df in dados.items():
 
 ax2d.set_xlabel("X (m)")
 ax2d.set_ylabel("Y (m)")
-ax2d.set_title("Top View (X-Y Plane)", y=-0.18)
+ax2d.set_title("Altitude Profile (X-Y Plane)", y=-0.18)
 ax2d.legend()
 ax2d.grid(True, alpha=0.3)
 ax2d.set_aspect("auto")
