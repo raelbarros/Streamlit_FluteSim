@@ -2,10 +2,6 @@ from src.utils.graph_plotly import plot_bar
 import numpy as np
 
 
-# ARQUIVO: droneCollisionData
-
-
-# fmt: off
 # Definicao do mapeamento de situacoes usando dicionario
 MAPPING_SITUATIONS = {
     (5, 0): 0, (0, 5): 0, # 5 com 0 ou 0 com 5 (pouso com decolagem ou decolagem com pouso) - Posicao 1 (indice 0)
@@ -38,7 +34,7 @@ CATEGORIAS = {
     "Takeoff": [3, 4, 5, 14],
     "Landing": [6, 8, 11, 17],
     "Landing and take-off": [0, 7, 9, 10, 12, 13, 15, 16, 18, 19],
-    "Cruise": [20, 1, 2],
+    "Cruising": [20, 1, 2],
 }
 
 

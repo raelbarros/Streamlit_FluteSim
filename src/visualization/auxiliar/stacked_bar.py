@@ -146,7 +146,7 @@ def build_stacked_bar(configs: Iterable[DatasetConfig] = None):
                 automargin=True
             ),
         xaxis=dict(
-                title="12",
+                # title="12",
                 title_font=dict(size=30),
                 tickfont=dict(size=30),
                 automargin=True
